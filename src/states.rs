@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use crate::constants::gas::Gas;
 use crate::units::pressure::Pressure;
 use crate::units::temperature::Temperature;
