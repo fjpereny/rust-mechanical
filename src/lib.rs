@@ -1,7 +1,7 @@
-mod compression;
-mod constants;
-mod states;
-mod units;
+pub mod compression;
+pub mod constants;
+pub mod states;
+pub mod units;
 
 #[cfg(test)]
 mod pressure_tests {
