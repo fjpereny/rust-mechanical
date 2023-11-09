@@ -66,22 +66,18 @@ impl Temperature {
         t2_value_k / t1_value_k
     }
 
-    pub fn add(self, p2: &Temperature) -> Self {
-        let t1_value_k = convert(self.value, &self.unit, &Unit::K);
-        let t2_value_k = convert(p2.value, &p2.unit, &Unit::K);
-        let mut total_temp = t1_value_k + t2_value_k;
-        total_temp = convert(total_temp, &Unit::K, &self.unit);
+    pub fn add_temperature(self, p2: &Temperature) -> Self {
+        let t2_value_conv = convert(p2.value, &p2.unit, &self.unit());
+        let total_temp = self.value() + t2_value_conv;
         Temperature {
             value: total_temp,
             unit: self.unit,
         }
     }
 
-    pub fn subtract(self, p2: &Temperature) -> Self {
-        let t1_value_k = convert(self.value, &self.unit, &Unit::K);
-        let t2_value_k = convert(p2.value, &p2.unit, &Unit::K);
-        let mut total_temp = t1_value_k - t2_value_k;
-        total_temp = convert(total_temp, &Unit::K, &self.unit);
+    pub fn subtract_temperature(self, p2: &Temperature) -> Self {
+        let t2_value_conv = convert(p2.value, &p2.unit, &self.unit());
+        let total_temp = self.value() - t2_value_conv;
         Temperature {
             value: total_temp,
             unit: self.unit,

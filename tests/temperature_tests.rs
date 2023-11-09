@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod temperature_tests {
+mod conversion_tests {
     use rust_mechanical::units::temperature::*;
 
     #[test]
@@ -26,7 +26,6 @@ mod temperature_tests {
     fn convert_temp_f() {
         let mut t = Temperature::new(100.0, Unit::C);
         t.convert_unit(Unit::F);
-        println!("{}", t.value());
         assert_eq!(212.0, t.value());
     }
 
@@ -34,7 +33,19 @@ mod temperature_tests {
     fn convert_temp_c() {
         let mut t = Temperature::new(100.0, Unit::C);
         t.convert_unit(Unit::C);
-        println!("{}", t.value());
         assert_eq!(100.0, t.value());
+    }
+}
+
+#[cfg(test)]
+mod temperature_addition {
+    use rust_mechanical::units::temperature::*;
+
+    #[test]
+    fn add_c_c() {
+        let t1 = Temperature::new(100.0, Unit::C);
+        let t2 = Temperature::new(100.0, Unit::C);
+        let t3 = t1.add_temperature(&t2);
+        assert_eq!(200.0, t3.value());
     }
 }

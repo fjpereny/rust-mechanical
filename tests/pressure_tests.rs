@@ -53,7 +53,7 @@ mod pressure_tests {
     fn add_pressure_psi() {
         let p1 = Pressure::new(100.0, Unit::Psi, true);
         let p2 = Pressure::new(100.0, Unit::Psi, true);
-        let p1 = p1.add(&p2);
+        let p1 = p1.add_pressure(&p2);
         println!("{}", p1.value());
         assert_eq!(200.0, p1.value());
         assert!(p1.is_absolute());
@@ -64,7 +64,7 @@ mod pressure_tests {
     fn add_pressure_kpa() {
         let p1 = Pressure::new(100.0, Unit::Psi, true);
         let p2 = Pressure::new(100.0, Unit::Kpa, false);
-        let p1 = p1.add(&p2);
+        let p1 = p1.add_pressure(&p2);
         let diff = p1.value() - 114.50377;
         assert!(diff < 0.0001);
         assert!(p1.is_absolute());
@@ -75,7 +75,7 @@ mod pressure_tests {
     fn add_pressure_pa() {
         let p1 = Pressure::new(100.0, Unit::Psi, false);
         let p2 = Pressure::new(10000.0, Unit::Pa, false);
-        let p1 = p1.add(&p2);
+        let p1 = p1.add_pressure(&p2);
         let diff = p1.value() - 101.450377;
         assert!(diff < 0.0001);
         assert!(!p1.is_absolute());
@@ -86,7 +86,7 @@ mod pressure_tests {
     fn add_pressure_bar() {
         let p1 = Pressure::new(100.0, Unit::Psi, true);
         let p2 = Pressure::new(10.0, Unit::Bar, false);
-        let p1 = p1.add(&p2);
+        let p1 = p1.add_pressure(&p2);
         let diff = p1.value() - 245.037738;
         assert!(diff < 0.0001);
         assert!(p1.is_absolute());
@@ -97,7 +97,7 @@ mod pressure_tests {
     fn sub_pressure_psi() {
         let p1 = Pressure::new(100.0, Unit::Psi, false);
         let p2 = Pressure::new(100.0, Unit::Psi, true);
-        let p1 = p1.subtract(&p2);
+        let p1 = p1.subtract_pressure(&p2);
         println!("{}", p1.value());
         assert_eq!(0.0, p1.value());
         assert!(!p1.is_absolute());
@@ -108,7 +108,7 @@ mod pressure_tests {
     fn sub_pressure_kpa() {
         let p1 = Pressure::new(100.0, Unit::Psi, true);
         let p2 = Pressure::new(100.0, Unit::Kpa, true);
-        let p1 = p1.subtract(&p2);
+        let p1 = p1.subtract_pressure(&p2);
         let diff = p1.value() - 85.49622;
         assert!(diff < 0.0001);
         assert!(p1.is_absolute());
@@ -119,7 +119,7 @@ mod pressure_tests {
     fn sub_pressure_pa() {
         let p1 = Pressure::new(100.0, Unit::Psi, false);
         let p2 = Pressure::new(10000.0, Unit::Pa, false);
-        let p1 = p1.subtract(&p2);
+        let p1 = p1.subtract_pressure(&p2);
         let diff = p1.value() - 98.549623;
         assert!(diff < 0.0001);
         assert!(!p1.is_absolute());
@@ -130,7 +130,7 @@ mod pressure_tests {
     fn sub_pressure_bar() {
         let p1 = Pressure::new(100.0, Unit::Psi, true);
         let p2 = Pressure::new(0.5, Unit::Bar, false);
-        let p1 = p1.subtract(&p2);
+        let p1 = p1.subtract_pressure(&p2);
         let diff = p1.value() - 92.74811311;
         assert!(diff < 0.0001);
         assert!(p1.is_absolute());
@@ -138,6 +138,7 @@ mod pressure_tests {
     }
 }
 
+#[cfg(test)]
 mod pressure_ratio_tests {
     use rust_mechanical::units::pressure::*;
 

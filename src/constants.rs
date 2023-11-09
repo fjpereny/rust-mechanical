@@ -3,7 +3,7 @@ pub mod gas {
     use crate::units::temperature::{self, Temperature};
 
     // Ideal Gas Constant
-    const IDEAL_GAS_CONST: f32 = 8.31446261815324;
+    const IDEAL_GAS_CONST: f32 = 8.314_463;
 
     pub struct Gas {
         pub name: &'static str,

@@ -13,7 +13,7 @@ pub fn isentropic_eff(state_1: &GasState, state_2: &GasState) -> Result<f32, Eng
     let t2 = t2.value();
 
     let k = state_1.gas().specific_heat_ratio;
-    let pr = Pressure::pressure_ratio(&state_1.pressure(), &state_2.pressure());
+    let pr = Pressure::pressure_ratio(state_1.pressure(), state_2.pressure());
 
     match pr {
         Ok(pr) => Ok(t1 * (pr.powf((k - 1.0) / k) - 1.0) / (t2 - t1)),
