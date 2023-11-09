@@ -12,7 +12,7 @@ mod gas_tests {
 
     #[test]
     fn air_density_0c_100kpa() {
-        let p = Pressure::new(100.0, pressure::Unit::Kpa);
+        let p = Pressure::new(100.0, pressure::Unit::Kpa, true);
         let t = Temperature::new(0.0, temperature::Unit::C);
         let d = AIR.density(t, p);
         assert_eq!(d, 1.2754)
@@ -20,7 +20,7 @@ mod gas_tests {
 
     #[test]
     fn air_density_20c_101kpa() {
-        let p = Pressure::new(101.325, pressure::Unit::Kpa);
+        let p = Pressure::new(101.325, pressure::Unit::Kpa, true);
         let t = Temperature::new(20.0, temperature::Unit::C);
         let d = AIR.density(t, p);
         println!("{d}");
