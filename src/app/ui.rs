@@ -1,19 +1,18 @@
-pub mod popup;
-pub mod view;
-
+use crate::app::App;
 use popup::Popup;
-use view::View;
-
 use ratatui::{
     layout::Layout,
     prelude::{Constraint, Direction, Frame, Rect},
 };
+use views::main_view::MainView;
+use views::View;
 
-use crate::app::App;
+pub mod popup;
+pub mod views;
 
 pub fn render(app: &mut App, f: &mut Frame) {
     match app.current_view {
-        View::Main => view::MainView::show(app, f),
+        View::Main => MainView::show(app, f),
     }
 
     match app.current_popup {

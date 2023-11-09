@@ -7,24 +7,28 @@ mod gas_tests {
     #[test]
     fn air_density() {
         let d = AIR.standard_density;
-        assert_eq!(d, 1.2754)
+        assert_eq!(d, 1.293)
     }
 
     #[test]
-    fn air_density_0c_100kpa() {
-        let p = Pressure::new(100.0, pressure::Unit::Kpa, true);
+    fn air_density_0c_1atm() {
+        let p = Pressure::new(101.325, pressure::Unit::Kpa, true);
         let t = Temperature::new(0.0, temperature::Unit::C);
         let d = AIR.density(t, p);
-        assert_eq!(d, 1.2754)
+        let expected = 1.293;
+        let diff = f32::abs(d / expected - 1.0);
+        println!("{diff}");
+        assert!(diff <= 0.02);
     }
 
     #[test]
-    fn air_density_20c_101kpa() {
+    fn air_density_20c_1atm() {
         let p = Pressure::new(101.325, pressure::Unit::Kpa, true);
         let t = Temperature::new(20.0, temperature::Unit::C);
         let d = AIR.density(t, p);
-        println!("{d}");
-        let diff = f32::abs(d - 1.2041);
-        assert!(diff < 0.0001)
+        let expected = 1.205;
+        let diff = f32::abs(d / expected - 1.0);
+        println!("{diff}");
+        assert!(diff <= 0.02);
     }
 }

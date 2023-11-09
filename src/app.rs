@@ -1,24 +1,25 @@
 use self::ui::popup::QuitWarningPopup;
-use self::ui::{popup::Popup, view::View};
+use self::ui::{popup::Popup, views::View};
 use ratatui::widgets::ListState;
+use rust_mechanical::constants::gas::*;
 
 pub mod event;
 pub mod tui;
 pub mod ui;
 pub mod update;
 
-pub struct App<'a> {
+pub struct App {
     pub should_quit: bool,
 
     pub current_view: View,
     pub current_popup: Popup,
 
-    main_menu: StatefulList<&'a str>,
+    main_menu: StatefulList<Gas>,
 
     pub quit_warning_popup: QuitWarningPopup,
 }
 
-impl<'a> App<'a> {
+impl App {
     pub fn new() -> Self {
         App {
             should_quit: false,
@@ -26,9 +27,7 @@ impl<'a> App<'a> {
             current_view: View::Main,
             current_popup: Popup::None,
 
-            main_menu: StatefulList::with_items(vec![
-                "Air", "Argon", "Helium", "Hydrogen", "Nitrogen", "Oxygen",
-            ]),
+            main_menu: StatefulList::with_items(gas_list()),
 
             quit_warning_popup: QuitWarningPopup::new(),
         }

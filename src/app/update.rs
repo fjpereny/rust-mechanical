@@ -1,5 +1,5 @@
 use crate::app::ui::popup::Popup;
-use crate::app::ui::view::View;
+use crate::app::ui::views::View;
 use crossterm::event::{KeyCode, KeyEvent};
 
 use crate::app::App;
