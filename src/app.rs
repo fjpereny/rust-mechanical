@@ -1,21 +1,27 @@
+use self::ui::popup::QuitWarningPopup;
+use self::ui::{popup::Popup, view::View};
+
 pub mod event;
 pub mod tui;
 pub mod ui;
 pub mod update;
 
-#[derive(Debug, Default)]
 pub struct App {
-    should_quit: bool,
-    show_quit_menu: bool,
-    quit_button_active: bool,
+    pub should_quit: bool,
+    pub current_view: View,
+    pub current_popup: Popup,
+
+    pub quit_warning_popup: QuitWarningPopup,
 }
 
 impl App {
     pub fn new() -> Self {
         App {
             should_quit: false,
-            show_quit_menu: false,
-            quit_button_active: false,
+            current_view: View::Main,
+            current_popup: Popup::None,
+
+            quit_warning_popup: QuitWarningPopup::new(),
         }
     }
 
@@ -23,13 +29,5 @@ impl App {
 
     pub fn quit(&mut self) {
         self.should_quit = true
-    }
-
-    pub fn get_show_quit_menu(&self) -> bool {
-        self.show_quit_menu
-    }
-
-    pub fn get_should_quit(&self) -> bool {
-        self.should_quit
     }
 }

@@ -20,7 +20,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     tui.enter()?;
 
     let mut last_draw_time = Instant::now();
-    while !app.get_should_quit() {
+    while !app.should_quit {
         let duration = Instant::now() - last_draw_time;
         if duration.as_millis() >= REFRESH_RATE_MILLISEC {
             tui.draw(&mut app)?;
