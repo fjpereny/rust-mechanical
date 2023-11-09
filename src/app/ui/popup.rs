@@ -1,9 +1,8 @@
+use crate::app::ui::centered_rect;
+use crate::app::App;
 use ratatui::prelude::{Alignment, Frame};
 use ratatui::style::{Color, Style};
 use ratatui::widgets::{Block, BorderType, Borders, Clear, Padding, Paragraph};
-
-use crate::app::ui::centered_rect;
-use crate::app::App;
 
 pub enum Popup {
     None,

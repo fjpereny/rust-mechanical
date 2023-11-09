@@ -1,35 +1,24 @@
 pub mod popup;
 pub mod view;
 
-use popup::{Popup, QuitWarningPopup};
+use popup::Popup;
+use view::View;
 
 use ratatui::{
     layout::Layout,
-    prelude::{Alignment, Constraint, Direction, Frame, Rect},
-    style::{Color, Style},
-    widgets::{Block, BorderType, Borders, Paragraph},
+    prelude::{Constraint, Direction, Frame, Rect},
 };
 
 use crate::app::App;
 
 pub fn render(app: &mut App, f: &mut Frame) {
-    f.render_widget(
-        Paragraph::new("Press `Esc` to quit.")
-            .block(
-                Block::default()
-                    .title("Rust Mechanical Engineering Tools")
-                    .title_alignment(Alignment::Left)
-                    .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded),
-            )
-            .style(Style::default().fg(Color::LightBlue))
-            .alignment(Alignment::Center),
-        f.size(),
-    );
+    match app.current_view {
+        View::Main => view::MainView::show(app, f),
+    }
 
     match app.current_popup {
         Popup::None => {}
-        Popup::QuitWarning => QuitWarningPopup::show(app, f),
+        Popup::QuitWarning => popup::QuitWarningPopup::show(app, f),
     }
 }
 
