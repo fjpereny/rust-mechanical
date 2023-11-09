@@ -15,6 +15,7 @@ impl GasDetailView {
             .direction(Direction::Horizontal)
             .constraints([Constraint::Percentage(25), Constraint::Percentage(25)])
             .split(f.size());
+
         let sub_layout = Layout::default()
             .direction(Direction::Vertical)
             .constraints([Constraint::Percentage(50), Constraint::Percentage(50)])
@@ -38,7 +39,7 @@ impl GasDetailView {
             items.push(ListItem::new(item.name));
         }
 
-        let list = List::new(items)
+        let list1 = List::new(items)
             .block(Block::default().borders(Borders::ALL).title("Gas"))
             .highlight_style(
                 Style::default()
@@ -47,7 +48,52 @@ impl GasDetailView {
                     .add_modifier(Modifier::BOLD),
             )
             .highlight_symbol(">> ");
+        f.render_stateful_widget(list1, layout[0], &mut app.main_menu.state);
 
-        f.render_stateful_widget(list, layout[0], &mut app.main_menu.state);
+        let selected_index = app.main_menu.state.selected();
+        match selected_index {
+            Some(index) => {
+                let selected_gas = app.main_menu.items.get(index);
+                match selected_gas {
+                    Some(g) => {
+                        if selected_gas.is_some() {
+                            let s: String;
+                            if g.chemical_formula.is_empty() {
+                                s = format!("{}", g.name());
+                            } else {
+                                s = format!("{} ({})", g.name(), g.chemical_formula);
+                            }
+                            let p = Paragraph::new(s);
+                            let mut layout = sub_layout[0].clone();
+                            layout.x += 3;
+                            layout.y += 2;
+                            layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+                        }
+
+                        let s = format!("Density: {} kg/m^3", g.standard_density());
+                        let p = Paragraph::new(s);
+                        let mut layout = sub_layout[0].clone();
+                        layout.x += 3;
+                        layout.y += 3;
+                        layout.width -= 3;
+                        layout.height = 1;
+                        f.render_widget(p, layout);
+
+                        let s = format!("Specific Heat Ratio (cp/cv): {}", g.specific_heat_ratio());
+                        let p = Paragraph::new(s);
+                        let mut layout = sub_layout[0].clone();
+                        layout.x += 3;
+                        layout.y += 4;
+                        layout.width -= 3;
+                        layout.height = 1;
+                        f.render_widget(p, layout);
+                    }
+                    None => (),
+                }
+            }
+            None => {}
+        }
     }
 }

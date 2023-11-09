@@ -33,6 +33,18 @@ pub mod gas {
         pub fn name(&self) -> &'static str {
             self.name
         }
+
+        pub fn formula(&self) -> &'static str {
+            self.chemical_formula
+        }
+
+        pub fn specific_heat_ratio(&self) -> String {
+            self.specific_heat_ratio.to_string()
+        }
+
+        pub fn standard_density(&self) -> String {
+            self.standard_density.to_string()
+        }
     }
 
     impl<'a> Into<Text<'a>> for Gas {
