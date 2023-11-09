@@ -5,13 +5,16 @@ pub mod update;
 
 #[derive(Debug, Default)]
 pub struct App {
-    counter: i32,
     should_quit: bool,
+    show_quit_menu: bool,
 }
 
 impl App {
     pub fn new() -> Self {
-        Self::default()
+        App {
+            should_quit: false,
+            show_quit_menu: false,
+        }
     }
 
     pub fn tick(&self) {}
@@ -20,16 +23,8 @@ impl App {
         self.should_quit = true
     }
 
-    pub fn increment_counter(&mut self) {
-        self.counter += 1
-    }
-
-    pub fn decrement_counter(&mut self) {
-        self.counter -= 1
-    }
-
-    pub fn get_count(&self) -> i32 {
-        self.counter
+    pub fn get_show_quit_menu(&self) -> bool {
+        self.show_quit_menu
     }
 
     pub fn get_should_quit(&self) -> bool {
