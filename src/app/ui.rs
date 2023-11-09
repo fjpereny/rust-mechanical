@@ -4,7 +4,7 @@ use ratatui::{
     layout::Layout,
     prelude::{Constraint, Direction, Frame, Rect},
 };
-use views::main_view::MainView;
+use views::gas_detail::GasDetailView;
 use views::View;
 
 pub mod popup;
@@ -12,7 +12,7 @@ pub mod views;
 
 pub fn render(app: &mut App, f: &mut Frame) {
     match app.current_view {
-        View::Main => MainView::show(app, f),
+        View::Main => GasDetailView::show(app, f),
     }
 
     match app.current_popup {

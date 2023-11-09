@@ -3,11 +3,11 @@ use ratatui::prelude::*;
 use ratatui::widgets::*;
 use std::vec;
 
-pub struct MainView {}
+pub struct GasDetailView {}
 
-impl MainView {
+impl GasDetailView {
     pub fn new() -> Self {
-        MainView {}
+        GasDetailView {}
     }
 
     pub fn show(app: &mut App, f: &mut Frame) {

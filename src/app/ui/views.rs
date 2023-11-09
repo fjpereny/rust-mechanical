@@ -1,4 +1,4 @@
-pub mod main_view;
+pub mod gas_detail;
 
 pub enum View {
     Main,
