@@ -7,6 +7,7 @@ pub mod update;
 pub struct App {
     should_quit: bool,
     show_quit_menu: bool,
+    quit_button_active: bool,
 }
 
 impl App {
@@ -14,6 +15,7 @@ impl App {
         App {
             should_quit: false,
             show_quit_menu: false,
+            quit_button_active: false,
         }
     }
 
