@@ -69,8 +69,8 @@ impl Pressure {
         Ok(p2_value_kpa / p1_value_kpa)
     }
 
-    pub fn add_pressure(self, p2: &Pressure) -> Self {
-        let p2_value_conv = convert(p2.value, &p2.unit, &self.unit());
+    pub fn add_pressure(self, other: &Pressure) -> Self {
+        let p2_value_conv = convert(other.value, &other.unit, &self.unit());
         let total_pressure = self.value() + p2_value_conv;
         Pressure {
             value: total_pressure,
@@ -79,8 +79,8 @@ impl Pressure {
         }
     }
 
-    pub fn subtract_pressure(self, p2: &Pressure) -> Self {
-        let p2_value_conv = convert(p2.value, &p2.unit, &self.unit());
+    pub fn subtract_pressure(self, other: &Pressure) -> Self {
+        let p2_value_conv = convert(other.value, &other.unit, &self.unit());
         let total_pressure = self.value() - p2_value_conv;
         Pressure {
             value: total_pressure,

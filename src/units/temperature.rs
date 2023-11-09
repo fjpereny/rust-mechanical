@@ -60,27 +60,52 @@ impl Temperature {
         self.unit = new_unit;
     }
 
-    pub fn ratio(p1: &Temperature, p2: &Temperature) -> f32 {
-        let t1_value_k = convert(p1.value, &p1.unit, &Unit::K);
-        let t2_value_k = convert(p2.value, &p2.unit, &Unit::K);
+    pub fn ratio(t1: &Temperature, t2: &Temperature) -> f32 {
+        let t1_value_k = convert(t1.value, &t1.unit, &Unit::K);
+        let t2_value_k = convert(t2.value, &t2.unit, &Unit::K);
         t2_value_k / t1_value_k
     }
 
-    pub fn add_temperature(self, p2: &Temperature) -> Self {
-        let t2_value_conv = convert(p2.value, &p2.unit, &self.unit());
-        let total_temp = self.value() + t2_value_conv;
+    pub fn add_temperature(self, other: &Temperature) -> Self {
         Temperature {
-            value: total_temp,
+            value: self.value() + scale_temperature(other.value(), self.unit(), other.unit()),
             unit: self.unit,
         }
     }
 
-    pub fn subtract_temperature(self, p2: &Temperature) -> Self {
-        let t2_value_conv = convert(p2.value, &p2.unit, &self.unit());
-        let total_temp = self.value() - t2_value_conv;
+    pub fn subtract_temperature(self, other: &Temperature) -> Self {
         Temperature {
-            value: total_temp,
+            value: self.value() - scale_temperature(other.value(), self.unit(), other.unit()),
             unit: self.unit,
         }
+    }
+}
+
+fn scale_temperature(value: f32, self_unit: Unit, other_unit: Unit) -> f32 {
+    match self_unit {
+        Unit::K => match other_unit {
+            Unit::K => value,
+            Unit::C => value,
+            Unit::F => value * 5.0 / 9.0,
+            Unit::R => value * 5.0 / 9.0,
+        },
+        Unit::C => match other_unit {
+            Unit::K => value,
+            Unit::C => value,
+            Unit::F => value * 5.0 / 9.0,
+            Unit::R => value * 5.0 / 9.0,
+        },
+        Unit::R => match other_unit {
+            Unit::K => value * 9.0 / 5.0,
+            Unit::C => value * 9.0 / 5.0,
+            Unit::F => value,
+            Unit::R => value,
+        },
+        Unit::F => match other_unit {
+            Unit::K => value * 9.0 / 5.0,
+            Unit::C => value * 9.0 / 5.0,
+            Unit::F => value,
+            Unit::R => value,
+        },
     }
 }
