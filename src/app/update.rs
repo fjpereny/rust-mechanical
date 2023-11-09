@@ -1,4 +1,5 @@
 use crate::app::ui::popup::Popup;
+use crate::app::ui::view::View;
 use crossterm::event::{KeyCode, KeyEvent};
 
 use crate::app::App;
@@ -13,6 +14,14 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
             app.quit_warning_popup.quit_button_selected = false;
         }
         _ => {}
+    }
+
+    match app.current_view {
+        View::Main => match key_event.code {
+            KeyCode::Up | KeyCode::Char('k') => app.main_menu.previous(),
+            KeyCode::Down | KeyCode::Char('j') => app.main_menu.next(),
+            _ => {}
+        },
     }
 
     match app.current_popup {

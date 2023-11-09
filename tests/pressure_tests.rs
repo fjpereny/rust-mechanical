@@ -54,7 +54,6 @@ mod pressure_tests {
         let p1 = Pressure::new(100.0, Unit::Psi, true);
         let p2 = Pressure::new(100.0, Unit::Psi, true);
         let p1 = p1.add_pressure(&p2);
-        println!("{}", p1.value());
         assert_eq!(200.0, p1.value());
         assert!(p1.is_absolute());
         assert!(p2.is_absolute());
@@ -98,7 +97,6 @@ mod pressure_tests {
         let p1 = Pressure::new(100.0, Unit::Psi, false);
         let p2 = Pressure::new(100.0, Unit::Psi, true);
         let p1 = p1.subtract_pressure(&p2);
-        println!("{}", p1.value());
         assert_eq!(0.0, p1.value());
         assert!(!p1.is_absolute());
         assert!(p2.is_absolute());
