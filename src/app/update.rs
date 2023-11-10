@@ -27,6 +27,14 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
             }
             _ => {}
         },
+        KeyCode::Char('/') => match app.current_popup {
+            Popup::None => {
+                if !app.command_line_active {
+                    app.command_line_active = true;
+                }
+            }
+            _ => {}
+        },
         _ => {}
     }
 
