@@ -5,10 +5,16 @@ use crossterm::event::{KeyCode, KeyEvent, KeyModifiers};
 pub fn update(app: &mut App, key_event: KeyEvent) {
     match key_event.modifiers {
         KeyModifiers::CONTROL => match key_event.code {
-            KeyCode::Up => app.gas_detail_active_menu = GasDetailWidget::TopRight,
-            KeyCode::Down => app.gas_detail_active_menu = GasDetailWidget::BottomRight,
-            KeyCode::Left => app.gas_detail_active_menu = GasDetailWidget::Left,
-            KeyCode::Right => match app.gas_detail_active_menu {
+            KeyCode::Up | KeyCode::Char('k') => {
+                app.gas_detail_active_menu = GasDetailWidget::TopRight
+            }
+            KeyCode::Down | KeyCode::Char('j') => {
+                app.gas_detail_active_menu = GasDetailWidget::BottomRight
+            }
+            KeyCode::Left | KeyCode::Char('h') => {
+                app.gas_detail_active_menu = GasDetailWidget::Left
+            }
+            KeyCode::Right | KeyCode::Char('l') => match app.gas_detail_active_menu {
                 GasDetailWidget::Left => app.gas_detail_active_menu = GasDetailWidget::TopRight,
                 _ => {}
             },
