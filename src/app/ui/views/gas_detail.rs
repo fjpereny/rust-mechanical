@@ -1,3 +1,5 @@
+use crate::app::ui::themes::palettes::*;
+use crate::app::ui::themes::Theme;
 use crate::app::App;
 use ratatui::prelude::*;
 use ratatui::widgets::*;
@@ -98,12 +100,21 @@ impl GasDetailView {
                 match selected_gas {
                     Some(g) => {
                         if selected_gas.is_some() {
-                            let mut y_offset = 2;
+                            let mut y_offset = 1;
+                            let x_offset = 1;
 
-                            let row_color_fg_1 = Color::LightBlue;
-                            let row_color_bg_1 = Color::DarkGray;
-                            let row_color_fg_2 = Color::White;
-                            let row_color_bg_2 = Color::Black;
+                            let row_color_fg_1;
+                            let row_color_bg_1;
+                            let row_color_fg_2;
+                            let row_color_bg_2;
+                            match app.current_theme {
+                                Theme::Default => {
+                                    row_color_fg_1 = DEFAULT_PALETTE.row_color_fg_a;
+                                    row_color_bg_1 = DEFAULT_PALETTE.row_color_bg_a;
+                                    row_color_fg_2 = DEFAULT_PALETTE.row_color_fg_b;
+                                    row_color_bg_2 = DEFAULT_PALETTE.row_color_bg_b;
+                                }
+                            }
 
                             let s: String;
                             if g.chemical_formula.is_empty() {
@@ -114,7 +125,7 @@ impl GasDetailView {
                             let mut p = Paragraph::new(s);
                             p = p.set_style(Style::default().fg(Color::LightGreen).bold());
                             let mut layout = sub_layout[0];
-                            layout.x += 3;
+                            layout.x += x_offset;
                             layout.y += y_offset;
                             layout.width -= 3;
                             layout.height = 1;
@@ -134,7 +145,7 @@ impl GasDetailView {
                                 );
                             }
                             let mut layout = sub_layout[0];
-                            layout.x += 3;
+                            layout.x += x_offset;
                             layout.y += y_offset;
                             layout.width -= 3;
                             layout.height = 1;
@@ -142,7 +153,8 @@ impl GasDetailView {
 
                             y_offset += 1;
                             row_color_toggle = !row_color_toggle;
-                            let s = format!("Specific Heat Cp: {:.4}", g.specific_heat_cp());
+                            let s =
+                                format!("Specific Heat Cp: {:.4} kJ/kg-K", g.specific_heat_cp());
                             let mut p = Paragraph::new(s);
                             if row_color_toggle {
                                 p = p.set_style(
@@ -154,7 +166,7 @@ impl GasDetailView {
                                 );
                             }
                             let mut layout = sub_layout[0];
-                            layout.x += 3;
+                            layout.x += x_offset;
                             layout.y += y_offset;
                             layout.width -= 3;
                             layout.height = 1;
@@ -162,7 +174,7 @@ impl GasDetailView {
 
                             y_offset += 1;
                             row_color_toggle = !row_color_toggle;
-                            let s = format!("Specific Heat Cv: {:.4}", g.specific_heat_cv());
+                            let s = format!("Specific Heat Cv:");
                             let mut p = Paragraph::new(s);
                             if row_color_toggle {
                                 p = p.set_style(
@@ -174,9 +186,27 @@ impl GasDetailView {
                                 );
                             }
                             let mut layout = sub_layout[0];
-                            layout.x += 3;
+                            layout.x += x_offset;
                             layout.y += y_offset;
                             layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+
+                            let s = format!("{:.4}", g.specific_heat_cv());
+                            let mut p = Paragraph::new(s);
+                            if row_color_toggle {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
+                                );
+                            } else {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
+                                );
+                            }
+                            let mut layout = sub_layout[0];
+                            layout.x += x_offset + 29;
+                            layout.y += y_offset;
+                            layout.width -= 30;
                             layout.height = 1;
                             f.render_widget(p, layout);
 
@@ -197,7 +227,7 @@ impl GasDetailView {
                                 );
                             }
                             let mut layout = sub_layout[0];
-                            layout.x += 3;
+                            layout.x += x_offset;
                             layout.y += y_offset;
                             layout.width -= 3;
                             layout.height = 1;
@@ -205,7 +235,7 @@ impl GasDetailView {
 
                             y_offset += 1;
                             row_color_toggle = !row_color_toggle;
-                            let s = format!("Molar Mass: {:.4}", g.molar_mass());
+                            let s = format!("Molar Mass: {:.4} g/mol", g.molar_mass());
                             let mut p = Paragraph::new(s);
                             if row_color_toggle {
                                 p = p.set_style(
@@ -217,7 +247,7 @@ impl GasDetailView {
                                 );
                             }
                             let mut layout = sub_layout[0];
-                            layout.x += 3;
+                            layout.x += x_offset;
                             layout.y += y_offset;
                             layout.width -= 3;
                             layout.height = 1;
@@ -240,7 +270,7 @@ impl GasDetailView {
                                 );
                             }
                             let mut layout = sub_layout[0];
-                            layout.x += 3;
+                            layout.x += x_offset;
                             layout.y += y_offset;
                             layout.width -= 3;
                             layout.height = 1;

@@ -9,6 +9,7 @@ use views::gas_detail::GasDetailView;
 use views::View;
 
 pub mod popups;
+pub mod themes;
 pub mod views;
 
 pub fn render(app: &mut App, f: &mut Frame) {

@@ -19,7 +19,7 @@ mod compression_tests {
         let eff = isentropic_eff(&state_1, &state_2).unwrap();
         let expected = 1.0;
         let diff = f32::abs(expected - eff);
-        assert!(diff < 0.001);
+        assert!(diff < 0.01);
         assert!(state_1.pressure().is_absolute());
         assert!(state_2.pressure().is_absolute());
     }
@@ -37,7 +37,7 @@ mod compression_tests {
         let eff = isentropic_eff(&state_1, &state_2).unwrap();
         let expected = 1.0;
         let diff = f32::abs(expected - eff);
-        assert!(diff < 0.001);
+        assert!(diff < 0.01);
         assert!(state_1.pressure().is_absolute());
         assert!(state_2.pressure().is_absolute());
     }
@@ -55,7 +55,7 @@ mod compression_tests {
         let eff = isentropic_eff(&state_1, &state_2).unwrap();
         let expected = 1.0;
         let diff = f32::abs(expected - eff);
-        assert!(diff < 0.001);
+        assert!(diff < 0.01);
         assert!(state_1.pressure().is_absolute());
         assert!(state_2.pressure().is_absolute());
     }

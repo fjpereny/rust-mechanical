@@ -1,6 +1,7 @@
 use ratatui::widgets::ListState;
 use rust_mechanical::constants::gas::*;
 use ui::popups::quit_warning_popup::QuitWarningPopup;
+use ui::themes::Theme;
 use ui::views::gas_detail::GasDetailWidget;
 use ui::{popups::Popup, views::View};
 
@@ -10,6 +11,7 @@ pub mod ui;
 pub mod update;
 
 pub struct App {
+    pub current_theme: Theme,
     pub should_quit: bool,
 
     pub current_view: View,
@@ -24,6 +26,7 @@ pub struct App {
 impl App {
     pub fn new() -> Self {
         App {
+            current_theme: Theme::Default,
             should_quit: false,
 
             current_view: View::GasDetailView,
