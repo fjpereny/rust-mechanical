@@ -1,5 +1,6 @@
 use crate::app::App;
-use popup::Popup;
+use popups::quit_warning_popup::QuitWarningPopup;
+use popups::Popup;
 use ratatui::{
     layout::Layout,
     prelude::{Constraint, Direction, Frame, Rect},
@@ -7,17 +8,17 @@ use ratatui::{
 use views::gas_detail::GasDetailView;
 use views::View;
 
-pub mod popup;
+pub mod popups;
 pub mod views;
 
 pub fn render(app: &mut App, f: &mut Frame) {
     match app.current_view {
-        View::Main => GasDetailView::show(app, f),
+        View::GasDetailView => GasDetailView::show(app, f),
     }
 
     match app.current_popup {
         Popup::None => {}
-        Popup::QuitWarning => popup::QuitWarningPopup::show(app, f),
+        Popup::QuitWarning => QuitWarningPopup::show(app, f),
     }
 }
 

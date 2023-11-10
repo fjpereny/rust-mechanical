@@ -1,7 +1,8 @@
-use self::ui::popup::QuitWarningPopup;
-use self::ui::{popup::Popup, views::View};
 use ratatui::widgets::ListState;
 use rust_mechanical::constants::gas::*;
+use ui::popups::quit_warning_popup::QuitWarningPopup;
+use ui::views::gas_detail::GasDetailWidget;
+use ui::{popups::Popup, views::View};
 
 pub mod event;
 pub mod tui;
@@ -14,7 +15,8 @@ pub struct App {
     pub current_view: View,
     pub current_popup: Popup,
 
-    main_menu: StatefulList<Gas>,
+    gas_detail_menu: StatefulList<Gas>,
+    gas_detail_active_menu: GasDetailWidget,
 
     pub quit_warning_popup: QuitWarningPopup,
 }
@@ -24,10 +26,11 @@ impl App {
         App {
             should_quit: false,
 
-            current_view: View::Main,
+            current_view: View::GasDetailView,
             current_popup: Popup::None,
 
-            main_menu: StatefulList::with_items(gas_list()),
+            gas_detail_menu: StatefulList::with_items(gas_list()),
+            gas_detail_active_menu: GasDetailWidget::Left,
 
             quit_warning_popup: QuitWarningPopup::new(),
         }
@@ -37,6 +40,12 @@ impl App {
 
     pub fn quit(&mut self) {
         self.should_quit = true
+    }
+}
+
+impl Default for App {
+    fn default() -> Self {
+        App::new()
     }
 }
 

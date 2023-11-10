@@ -3,6 +3,12 @@ use ratatui::prelude::*;
 use ratatui::widgets::*;
 use std::vec;
 
+pub enum GasDetailWidget {
+    Left,
+    TopRight,
+    BottomRight,
+}
+
 pub struct GasDetailView {}
 
 impl GasDetailView {
@@ -16,13 +22,57 @@ impl GasDetailView {
             .constraints([Constraint::Percentage(25), Constraint::Percentage(25)])
             .split(f.size());
 
-        let menu_items = &app.main_menu.items;
+        let menu_items = &app.gas_detail_menu.items;
         let mut items: Vec<ListItem> = vec![];
         for item in menu_items {
             items.push(ListItem::new(item.name));
         }
+
+        let border_type = BorderType::Rounded;
+        let active_border_style = Style::default().cyan().on_dark_gray();
+        let inactive_border_style = Style::default().gray().on_dark_gray();
+
+        let left_block = match app.gas_detail_active_menu {
+            GasDetailWidget::Left => Block::default()
+                .borders(Borders::ALL)
+                .border_type(border_type)
+                .border_style(active_border_style)
+                .title("Gas"),
+            _ => Block::default()
+                .borders(Borders::ALL)
+                .border_type(border_type)
+                .border_style(inactive_border_style)
+                .title("Gas"),
+        };
+
+        let top_right_block = match app.gas_detail_active_menu {
+            GasDetailWidget::TopRight => Block::default()
+                .borders(Borders::ALL)
+                .border_type(border_type)
+                .border_style(active_border_style)
+                .title("Properties"),
+            _ => Block::default()
+                .borders(Borders::ALL)
+                .border_type(border_type)
+                .border_style(inactive_border_style)
+                .title("Properties"),
+        };
+
+        let bottom_right_block = match app.gas_detail_active_menu {
+            GasDetailWidget::BottomRight => Block::default()
+                .borders(Borders::ALL)
+                .border_type(border_type)
+                .border_style(active_border_style)
+                .title("Calculation"),
+            _ => Block::default()
+                .borders(Borders::ALL)
+                .border_type(border_type)
+                .border_style(inactive_border_style)
+                .title("Calculation"),
+        };
+
         let list1 = List::new(items)
-            .block(Block::default().borders(Borders::ALL).title("Gas"))
+            .block(left_block)
             .highlight_style(
                 Style::default()
                     .bg(Color::LightBlue)
@@ -30,27 +80,21 @@ impl GasDetailView {
                     .add_modifier(Modifier::BOLD),
             )
             .highlight_symbol(">> ");
-        f.render_stateful_widget(list1, layout[0], &mut app.main_menu.state);
+        f.render_stateful_widget(list1, layout[0], &mut app.gas_detail_menu.state);
 
         let sub_layout = Layout::default()
             .direction(Direction::Vertical)
             .constraints([Constraint::Percentage(50), Constraint::Percentage(50)])
             .split(layout[1]);
 
-        f.render_widget(
-            Block::new().borders(Borders::ALL).title("Properties"),
-            sub_layout[0],
-        );
+        f.render_widget(top_right_block, sub_layout[0]);
 
-        f.render_widget(
-            Block::new().borders(Borders::ALL).title("Calculation"),
-            sub_layout[1],
-        );
+        f.render_widget(bottom_right_block, sub_layout[1]);
 
-        let selected_index = app.main_menu.state.selected();
+        let selected_index = app.gas_detail_menu.state.selected();
         match selected_index {
             Some(index) => {
-                let selected_gas = app.main_menu.items.get(index);
+                let selected_gas = app.gas_detail_menu.items.get(index);
                 match selected_gas {
                     Some(g) => {
                         if selected_gas.is_some() {
@@ -61,7 +105,7 @@ impl GasDetailView {
                                 s = format!("{} ({})", g.name(), g.chemical_formula);
                             }
                             let p = Paragraph::new(s);
-                            let mut layout = sub_layout[0].clone();
+                            let mut layout = sub_layout[0];
                             layout.x += 3;
                             layout.y += 2;
                             layout.width -= 3;
@@ -71,7 +115,7 @@ impl GasDetailView {
 
                         let s = format!("Density: {} kg/m^3", g.standard_density());
                         let p = Paragraph::new(s);
-                        let mut layout = sub_layout[0].clone();
+                        let mut layout = sub_layout[0];
                         layout.x += 3;
                         layout.y += 3;
                         layout.width -= 3;
@@ -80,7 +124,7 @@ impl GasDetailView {
 
                         let s = format!("Specific Heat Ratio (cp/cv): {}", g.specific_heat_ratio());
                         let p = Paragraph::new(s);
-                        let mut layout = sub_layout[0].clone();
+                        let mut layout = sub_layout[0];
                         layout.x += 3;
                         layout.y += 4;
                         layout.width -= 3;
@@ -92,5 +136,11 @@ impl GasDetailView {
             }
             None => {}
         }
+    }
+}
+
+impl Default for GasDetailView {
+    fn default() -> Self {
+        GasDetailView::new()
     }
 }
