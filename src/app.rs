@@ -14,12 +14,14 @@ pub mod update;
 pub struct App {
     pub current_theme: Theme,
     pub should_quit: bool,
-    pub command_line_active: bool,
 
     pub current_view: View,
     pub current_popup: Popup,
 
+    pub command_line_active: bool,
     command_line: CommandLine,
+    command_line_error: bool,
+
     gas_detail_menu: StatefulList<Gas>,
     gas_detail_active_menu: GasDetailWidget,
 
@@ -31,12 +33,14 @@ impl App {
         App {
             current_theme: Theme::Default,
             should_quit: false,
-            command_line_active: false,
 
             current_view: View::GasDetailView,
             current_popup: Popup::None,
 
+            command_line_active: false,
             command_line: CommandLine::new(),
+            command_line_error: false,
+
             gas_detail_menu: StatefulList::with_items(gas_list()),
             gas_detail_active_menu: GasDetailWidget::Left,
 
@@ -48,6 +52,16 @@ impl App {
 
     pub fn quit(&mut self) {
         self.should_quit = true
+    }
+
+    pub fn command(&mut self, command_str: String) {
+        match command_str.as_str() {
+            ":q!" => self.should_quit = true,
+            _ => {
+                self.command_line_error = true;
+                self.command_line.text = String::from("Unknown command!");
+            }
+        }
     }
 }
 

@@ -41,12 +41,15 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
     if app.command_line_active {
         match key_event.code {
             KeyCode::Char(ch) => {
+                if app.command_line_error {
+                    app.command_line.text = String::from(":");
+                    app.command_line_error = false;
+                }
                 app.command_line.text.push(ch);
             }
             KeyCode::Enter => {
-                app.command_line.submit();
-                app.command_line.clear();
-                app.command_line_active = false;
+                let command = app.command_line.text.clone();
+                app.command(command);
             }
             KeyCode::Backspace => {
                 app.command_line.text.pop();
