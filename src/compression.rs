@@ -12,7 +12,7 @@ pub fn isentropic_eff(state_1: &GasState, state_2: &GasState) -> Result<f32, Eng
     t2.convert_unit(temperature::Unit::K);
     let t2 = t2.value();
 
-    let k = state_1.gas().specific_heat_ratio;
+    let k = state_1.gas().specific_heat_ratio();
     let pr = Pressure::pressure_ratio(state_1.pressure(), state_2.pressure());
 
     match pr {

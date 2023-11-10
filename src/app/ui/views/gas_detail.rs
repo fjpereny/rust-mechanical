@@ -98,38 +98,154 @@ impl GasDetailView {
                 match selected_gas {
                     Some(g) => {
                         if selected_gas.is_some() {
+                            let mut y_offset = 2;
+
+                            let row_color_fg_1 = Color::LightBlue;
+                            let row_color_bg_1 = Color::DarkGray;
+                            let row_color_fg_2 = Color::White;
+                            let row_color_bg_2 = Color::Black;
+
                             let s: String;
                             if g.chemical_formula.is_empty() {
                                 s = format!("{}", g.name());
                             } else {
                                 s = format!("{} ({})", g.name(), g.chemical_formula);
                             }
-                            let p = Paragraph::new(s);
+                            let mut p = Paragraph::new(s);
+                            p = p.set_style(Style::default().fg(Color::LightGreen).bold());
                             let mut layout = sub_layout[0];
                             layout.x += 3;
-                            layout.y += 2;
+                            layout.y += y_offset;
+                            layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+
+                            y_offset += 1;
+                            let mut row_color_toggle = true;
+                            let s = format!("Density: {:.4} kg/m^3", g.standard_density());
+                            let mut p = Paragraph::new(s);
+                            if row_color_toggle {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
+                                );
+                            } else {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
+                                );
+                            }
+                            let mut layout = sub_layout[0];
+                            layout.x += 3;
+                            layout.y += y_offset;
+                            layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+
+                            y_offset += 1;
+                            row_color_toggle = !row_color_toggle;
+                            let s = format!("Specific Heat Cp: {:.4}", g.specific_heat_cp());
+                            let mut p = Paragraph::new(s);
+                            if row_color_toggle {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
+                                );
+                            } else {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
+                                );
+                            }
+                            let mut layout = sub_layout[0];
+                            layout.x += 3;
+                            layout.y += y_offset;
+                            layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+
+                            y_offset += 1;
+                            row_color_toggle = !row_color_toggle;
+                            let s = format!("Specific Heat Cv: {:.4}", g.specific_heat_cv());
+                            let mut p = Paragraph::new(s);
+                            if row_color_toggle {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
+                                );
+                            } else {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
+                                );
+                            }
+                            let mut layout = sub_layout[0];
+                            layout.x += 3;
+                            layout.y += y_offset;
+                            layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+
+                            y_offset += 1;
+                            row_color_toggle = !row_color_toggle;
+                            let s = format!(
+                                "Specific Heat Ratio (Cp/Cv): {:.4}",
+                                g.specific_heat_ratio()
+                            );
+                            let mut p = Paragraph::new(s);
+                            if row_color_toggle {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
+                                );
+                            } else {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
+                                );
+                            }
+                            let mut layout = sub_layout[0];
+                            layout.x += 3;
+                            layout.y += y_offset;
+                            layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+
+                            y_offset += 1;
+                            row_color_toggle = !row_color_toggle;
+                            let s = format!("Molar Mass: {:.4}", g.molar_mass());
+                            let mut p = Paragraph::new(s);
+                            if row_color_toggle {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
+                                );
+                            } else {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
+                                );
+                            }
+                            let mut layout = sub_layout[0];
+                            layout.x += 3;
+                            layout.y += y_offset;
+                            layout.width -= 3;
+                            layout.height = 1;
+                            f.render_widget(p, layout);
+
+                            y_offset += 1;
+                            row_color_toggle = !row_color_toggle;
+                            let s = format!(
+                                "Specific Heat Ratio (cp/cv): {:.4}",
+                                g.specific_heat_ratio()
+                            );
+                            let mut p = Paragraph::new(s);
+                            if row_color_toggle {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
+                                );
+                            } else {
+                                p = p.set_style(
+                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
+                                );
+                            }
+                            let mut layout = sub_layout[0];
+                            layout.x += 3;
+                            layout.y += y_offset;
                             layout.width -= 3;
                             layout.height = 1;
                             f.render_widget(p, layout);
                         }
-
-                        let s = format!("Density: {} kg/m^3", g.standard_density());
-                        let p = Paragraph::new(s);
-                        let mut layout = sub_layout[0];
-                        layout.x += 3;
-                        layout.y += 3;
-                        layout.width -= 3;
-                        layout.height = 1;
-                        f.render_widget(p, layout);
-
-                        let s = format!("Specific Heat Ratio (cp/cv): {}", g.specific_heat_ratio());
-                        let p = Paragraph::new(s);
-                        let mut layout = sub_layout[0];
-                        layout.x += 3;
-                        layout.y += 4;
-                        layout.width -= 3;
-                        layout.height = 1;
-                        f.render_widget(p, layout);
                     }
                     None => (),
                 }

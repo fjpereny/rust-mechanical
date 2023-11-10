@@ -13,8 +13,10 @@ pub mod gas {
     pub struct Gas {
         pub name: &'static str,
         pub chemical_formula: &'static str,
-        pub specific_heat_ratio: f32,
+        pub specific_heat_cp: f32,
+        pub specific_heat_cv: f32,
         pub standard_density: f32,
+        pub molar_mass: f32,
     }
 
     impl Gas {
@@ -38,12 +40,24 @@ pub mod gas {
             self.chemical_formula
         }
 
-        pub fn specific_heat_ratio(&self) -> String {
-            self.specific_heat_ratio.to_string()
+        pub fn specific_heat_cp(&self) -> f32 {
+            self.specific_heat_cp
+        }
+
+        pub fn specific_heat_cv(&self) -> f32 {
+            self.specific_heat_cv
+        }
+
+        pub fn specific_heat_ratio(&self) -> f32 {
+            self.specific_heat_cp / self.specific_heat_cv
         }
 
         pub fn standard_density(&self) -> String {
             self.standard_density.to_string()
+        }
+
+        pub fn molar_mass(&self) -> f32 {
+            self.molar_mass
         }
     }
 
@@ -58,22 +72,28 @@ pub mod gas {
     pub const AIR: Gas = Gas {
         name: "Air",
         chemical_formula: "",
-        specific_heat_ratio: 1.40,
+        specific_heat_cp: 1.005,
+        specific_heat_cv: 0.7164,
         standard_density: 1.293, // kg/m^3 @ 0C / 101.325 kPa (1 atm)
+        molar_mass: 28.9647,
     };
 
     pub const ARGON: Gas = Gas {
         name: "Argon",
         chemical_formula: "Ar",
-        specific_heat_ratio: 1.667,
+        specific_heat_cp: 0.520,
+        specific_heat_cv: 0.312,
         standard_density: 1.7837, // kg/m^3 @ 0C / 101.325 kPa (1 atm)
+        molar_mass: 39.948,
     };
 
     pub const NITROGEN: Gas = Gas {
         name: "Nitrogen",
         chemical_formula: "N2",
-        specific_heat_ratio: 1.40,
+        specific_heat_cp: 1.04,
+        specific_heat_cv: 0.743,
         standard_density: 1.2506, // kg/m^3 @ 0C / 101.325 kPa (1 atm)
+        molar_mass: 28.013,
     };
 }
 
