@@ -7,8 +7,8 @@ use app::App;
 use ratatui::{backend::CrosstermBackend, Terminal};
 use std::time::Instant;
 
-const REFRESH_RATE_MILLISEC: u128 = 25;
-const EVENT_POLL_RATE_MILLISEC: u64 = 50;
+const REFRESH_RATE_MILLISEC: u128 = 15;
+const EVENT_POLL_RATE_MILLISEC: u64 = 100;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut app = App::new();
