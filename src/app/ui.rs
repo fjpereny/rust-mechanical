@@ -1,3 +1,4 @@
+use crate::app::ui::command_line::CommandLine;
 use crate::app::App;
 use popups::quit_warning_popup::QuitWarningPopup;
 use popups::Popup;
@@ -8,6 +9,7 @@ use ratatui::{
 use views::gas_detail::GasDetailView;
 use views::View;
 
+pub mod command_line;
 pub mod popups;
 pub mod themes;
 pub mod views;
@@ -20,6 +22,10 @@ pub fn render(app: &mut App, f: &mut Frame) {
     match app.current_popup {
         Popup::None => {}
         Popup::QuitWarning => QuitWarningPopup::show(app, f),
+    }
+
+    if app.command_line_active {
+        CommandLine::show(app, f);
     }
 }
 

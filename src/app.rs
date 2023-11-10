@@ -1,5 +1,6 @@
 use ratatui::widgets::ListState;
 use rust_mechanical::constants::gas::*;
+use ui::command_line::CommandLine;
 use ui::popups::quit_warning_popup::QuitWarningPopup;
 use ui::themes::Theme;
 use ui::views::gas_detail::GasDetailWidget;
@@ -13,10 +14,12 @@ pub mod update;
 pub struct App {
     pub current_theme: Theme,
     pub should_quit: bool,
+    pub command_line_active: bool,
 
     pub current_view: View,
     pub current_popup: Popup,
 
+    command_line: CommandLine,
     gas_detail_menu: StatefulList<Gas>,
     gas_detail_active_menu: GasDetailWidget,
 
@@ -28,10 +31,12 @@ impl App {
         App {
             current_theme: Theme::Default,
             should_quit: false,
+            command_line_active: false,
 
             current_view: View::GasDetailView,
             current_popup: Popup::None,
 
+            command_line: CommandLine::new(),
             gas_detail_menu: StatefulList::with_items(gas_list()),
             gas_detail_active_menu: GasDetailWidget::Left,
 
