@@ -44,12 +44,21 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
                 if app.command_line_error {
                     app.command_line.text = String::from(":");
                     app.command_line_error = false;
+                    if ch != ':' {
+                        app.command_line.text.push(ch);
+                    }
+                } else {
+                    app.command_line.text.push(ch);
                 }
-                app.command_line.text.push(ch);
             }
             KeyCode::Enter => {
                 let command = app.command_line.text.clone();
-                app.command(command);
+                let first_char = command.chars().nth(0);
+                if first_char.is_some() && first_char.unwrap() == '/' {
+                    // Search Here
+                } else {
+                    app.command(command);
+                }
             }
             KeyCode::Backspace => {
                 app.command_line.text.pop();
