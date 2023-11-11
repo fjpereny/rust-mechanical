@@ -1,6 +1,7 @@
 use crate::app::ui::themes::palettes::*;
 use crate::app::ui::themes::Theme;
 use crate::app::App;
+use mechanical_engineering::constants::gas_properties::air;
 use ratatui::prelude::*;
 use ratatui::widgets::*;
 use std::vec;
@@ -256,8 +257,8 @@ impl GasDetailView {
                             y_offset += 1;
                             row_color_toggle = !row_color_toggle;
                             let s = format!(
-                                "Specific Heat Ratio (cp/cv): {:.4}",
-                                g.specific_heat_ratio()
+                                "Calulated (cp/cv): {:.4}",
+                                air::specific_heat_ratio::interpolate(225.0, 0.05).unwrap()
                             );
                             let mut p = Paragraph::new(s);
                             if row_color_toggle {
