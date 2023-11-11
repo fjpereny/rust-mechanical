@@ -1,6 +1,6 @@
 [package]
 name = "rust_mechanical"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 license = "MIT"
 description = "Mechanical engineering calculation library and terminal based GUI"
