@@ -1,3 +1,5 @@
+pub mod gas_properties;
+
 pub mod gas {
     use crate::units::pressure::{self, Pressure};
     use crate::units::temperature::{self, Temperature};
