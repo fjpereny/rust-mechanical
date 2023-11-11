@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod conversion_tests {
-    use rust_mechanical::units::temperature::*;
+    use mechanical_engineering::units::temperature::*;
 
     #[test]
     fn create_temp() {
@@ -39,7 +39,7 @@ mod conversion_tests {
 
 #[cfg(test)]
 mod temperature_add_sub {
-    use rust_mechanical::units::temperature::*;
+    use mechanical_engineering::units::temperature::*;
 
     #[test]
     fn add_c_c() {

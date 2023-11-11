@@ -1,10 +1,10 @@
 #[cfg(test)]
 mod compression_tests {
-    use rust_mechanical::compression::isentropic_eff;
-    use rust_mechanical::constants::gas;
-    use rust_mechanical::states::GasState;
-    use rust_mechanical::units::pressure::{self, Pressure};
-    use rust_mechanical::units::temperature::{self, Temperature};
+    use mechanical_engineering::compression::isentropic_eff;
+    use mechanical_engineering::constants::gas;
+    use mechanical_engineering::states::GasState;
+    use mechanical_engineering::units::pressure::{self, Pressure};
+    use mechanical_engineering::units::temperature::{self, Temperature};
 
     #[test]
     fn isentropic_eff_1() {

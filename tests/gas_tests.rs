@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod gas_tests {
-    use rust_mechanical::constants::gas::*;
-    use rust_mechanical::units::pressure::{self, Pressure};
-    use rust_mechanical::units::temperature::{self, Temperature};
+    use mechanical_engineering::constants::gas::*;
+    use mechanical_engineering::units::pressure::{self, Pressure};
+    use mechanical_engineering::units::temperature::{self, Temperature};
 
     #[test]
     fn air_density() {

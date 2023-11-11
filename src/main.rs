@@ -1,9 +1,9 @@
 pub mod app;
 
-use app::event::{Event, EventHandler};
-use app::tui::Tui;
-use app::update::update;
-use app::App;
+use crate::app::event::{Event, EventHandler};
+use crate::app::tui::Tui;
+use crate::app::update::update;
+use crate::app::App;
 use ratatui::{backend::CrosstermBackend, Terminal};
 use std::time::Instant;
 

@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod pressure_tests {
-    use rust_mechanical::units::pressure::*;
+    use mechanical_engineering::units::pressure::*;
 
     #[test]
     fn create_pressure() {
@@ -138,7 +138,7 @@ mod pressure_tests {
 
 #[cfg(test)]
 mod pressure_ratio_tests {
-    use rust_mechanical::units::pressure::*;
+    use mechanical_engineering::units::pressure::*;
 
     #[test]
     fn ratio_pressure_psi() {

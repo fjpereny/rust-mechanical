@@ -1,5 +1,5 @@
+use mechanical_engineering::constants::gas::{self, Gas};
 use ratatui::widgets::ListState;
-use rust_mechanical::constants::gas::*;
 use ui::command_line::CommandLine;
 use ui::popups::quit_warning_popup::QuitWarningPopup;
 use ui::themes::Theme;
@@ -41,7 +41,7 @@ impl App {
             command_line: CommandLine::new(),
             command_line_error: false,
 
-            gas_detail_menu: StatefulList::with_items(gas_list()),
+            gas_detail_menu: StatefulList::with_items(gas::gas_list()),
             gas_detail_active_menu: GasDetailWidget::Left,
 
             quit_warning_popup: QuitWarningPopup::new(),
