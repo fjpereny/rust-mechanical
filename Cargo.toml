@@ -1,7 +1,9 @@
 [package]
-name = "rust-mechanical"
+name = "rust_mechanical"
 version = "0.0.1"
 edition = "2021"
+license = "MIT"
+description = "Mechanical engineering calculation library and terminal based GUI"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

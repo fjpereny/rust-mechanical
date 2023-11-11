@@ -3,13 +3,14 @@ pub mod gas {
     use crate::units::temperature::{self, Temperature};
     use ratatui::text::Text;
 
-    // Ideal Gas Constant
+    /// Ideal gas constant
     const IDEAL_GAS_CONST: f32 = 8.314_463;
 
     pub fn gas_list() -> Vec<Gas> {
         vec![AIR, ARGON, NITROGEN]
     }
 
+    /// Properties of a gas
     pub struct Gas {
         pub name: &'static str,
         pub chemical_formula: &'static str,
@@ -69,6 +70,18 @@ pub mod gas {
         }
     }
 
+    /// Dry air properties at 0 degrees C and 1 atm
+    /// # Definition
+    /// ```
+    /// pub const AIR: Gas = Gas {
+    ///     name: "Air",
+    ///     chemical_formula: "",
+    ///     specific_heat_cp: 1.005,
+    ///     specific_heat_cv: 0.7164,
+    ///     standard_density: 1.293, // kg/m^3 @ 0C / 101.325 kPa (1 atm)
+    ///     molar_mass: 28.9647,
+    /// };
+    /// ```
     pub const AIR: Gas = Gas {
         name: "Air",
         chemical_formula: "",
