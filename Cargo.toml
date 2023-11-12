@@ -1,5 +1,5 @@
 [package]
-name = "mechanical-engineering"
+name = "rust-mechanical"
 version = "0.0.0"
 edition = "2021"
 license = "MIT"

@@ -1,5 +1,5 @@
-use mechanical_engineering::constants::gas::{self, Gas};
 use ratatui::widgets::ListState;
+use rust_mechanical::constants::gas::{self, Gas};
 use ui::command_line::CommandLine;
 use ui::popups::quit_warning_popup::QuitWarningPopup;
 use ui::themes::Theme;
