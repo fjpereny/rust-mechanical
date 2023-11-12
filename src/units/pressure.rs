@@ -23,11 +23,11 @@ impl Unit {
 
 fn conversion_kpa(unit: &Unit) -> f32 {
     match unit {
-        Unit::Psi => 0.14503774,
+        Unit::Psi => 0.145_037_7,
         Unit::Kpa => 1.0,
-        Unit::Pa => 1000.0,
+        Unit::Pa => 1_000.0,
         Unit::Bar => 0.01,
-        Unit::Atm => 1.009_869_2,
+        Unit::Atm => 0.009_869_2,
     }
 }
 

@@ -20,8 +20,6 @@ pub struct GasDetailViewState {
 
     // Calculated
     specific_heat_ratio: f32,
-
-    update: bool,
 }
 
 impl GasDetailViewState {
@@ -37,8 +35,33 @@ impl GasDetailViewState {
             temperature,
 
             specific_heat_ratio,
-            update: false,
         }
+    }
+
+    pub fn update(&mut self) {
+        let mut pressure_atm = self.pressure.clone();
+        pressure_atm.convert_unit(pressure::Unit::Atm);
+
+        let mut temperature_k = self.temperature.clone();
+        temperature_k.convert_unit(temperature::Unit::K);
+
+        self.specific_heat_ratio = match air::specific_heat_ratio::interpolate(
+            temperature_k.value(),
+            pressure_atm.value(),
+        ) {
+            Some(val) => val,
+            _ => -1.0,
+        };
+    }
+
+    pub fn set_pressure_state(&mut self, pressure: pressure::Pressure) {
+        self.pressure = pressure;
+        self.update();
+    }
+
+    pub fn set_temperature_state(&mut self, temperature: temperature::Temperature) {
+        self.temperature = temperature;
+        self.update();
     }
 }
 
@@ -182,11 +205,13 @@ impl GasDetailView {
                                 f,
                             );
 
+                            let specific_heat_ratio = app.gas_detail_view_state.specific_heat_ratio;
+                            let specific_heat_ratio = match specific_heat_ratio < 0.0 {
+                                true => "N/A".to_string(),
+                                _ => format!("{specific_heat_ratio:.4}"),
+                            };
                             render_row(
-                                format!(
-                                    "Specific Heat Ratio (Cp/Cv): {:.4}",
-                                    app.gas_detail_view_state.specific_heat_ratio,
-                                ),
+                                format!("Specific Heat Ratio (Cp/Cv): {specific_heat_ratio}",),
                                 sub_layout[0],
                                 x_offset,
                                 &mut y_offset,
