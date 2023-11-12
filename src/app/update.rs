@@ -53,7 +53,7 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
             }
             KeyCode::Enter => {
                 let command = app.command_line.text.clone();
-                let first_char = command.chars().nth(0);
+                let first_char = command.chars().next();
                 if first_char.is_some() && first_char.unwrap() == '/' {
                     // Search Here
                 } else {
@@ -62,7 +62,7 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
             }
             KeyCode::Backspace => {
                 app.command_line.text.pop();
-                if app.command_line.text == "".to_string() {
+                if app.command_line.text == *"" {
                     app.command_line_active = false
                 }
             }

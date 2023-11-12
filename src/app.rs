@@ -65,7 +65,7 @@ impl App {
     }
 
     pub fn command(&mut self, command_str: String) {
-        let command_args: Vec<&str> = command_str.split(" ").collect();
+        let command_args: Vec<&str> = command_str.split(' ').collect();
         let first_arg = command_args.first();
         match first_arg {
             Some(arg) => match *arg {
@@ -147,10 +147,9 @@ impl<T> StatefulList<T> {
             state: ListState::default(),
             items,
         };
-        let first_item = list.items.first();
-        match first_item {
-            Some(_) => list.state.select(Some(0)),
-            None => {}
+
+        if list.items.first().is_some() {
+            list.state.select(Some(0))
         }
         list
     }

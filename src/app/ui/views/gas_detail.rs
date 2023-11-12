@@ -258,7 +258,7 @@ fn render_row(
     } else {
         p = p.set_style(Style::default().fg(row_color_fg_2).bg(row_color_bg_2));
     }
-    let mut layout = layout.clone();
+    let mut layout = layout;
     layout.x += x_offset;
     layout.y += *y_offset;
     layout.width -= 3;
