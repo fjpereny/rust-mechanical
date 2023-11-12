@@ -131,9 +131,6 @@ impl GasDetailView {
                 match selected_gas {
                     Some(g) => {
                         if selected_gas.is_some() {
-                            let mut y_offset = 1;
-                            let x_offset = 1;
-
                             let row_color_fg_1;
                             let row_color_bg_1;
                             let row_color_fg_2;
@@ -147,172 +144,59 @@ impl GasDetailView {
                                 }
                             }
 
-                            let s: String;
-                            if g.chemical_formula.is_empty() {
-                                s = format!("{}", g.name());
-                            } else {
-                                s = format!("{} ({})", g.name(), g.chemical_formula);
-                            }
-                            let mut p = Paragraph::new(s);
-                            p = p.set_style(Style::default().fg(Color::LightGreen).bold());
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset;
-                            layout.y += y_offset;
-                            layout.width -= 3;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
-
-                            y_offset += 1;
+                            let x_offset = 1;
+                            let mut y_offset = 0;
                             let mut row_color_toggle = true;
-                            let s = format!(
-                                "Pressure: {:.4} {}",
-                                app.gas_detail_view_state.pressure.value(),
-                                app.gas_detail_view_state.pressure.unit().to_string(),
+
+                            render_row(
+                                format!(
+                                    "Pressure: {:.4} {}",
+                                    app.gas_detail_view_state.pressure.value(),
+                                    app.gas_detail_view_state.pressure.unit().to_string(),
+                                ),
+                                sub_layout[0],
+                                x_offset,
+                                &mut y_offset,
+                                row_color_fg_1,
+                                row_color_bg_1,
+                                row_color_fg_2,
+                                row_color_bg_2,
+                                &mut row_color_toggle,
+                                f,
                             );
-                            let mut p = Paragraph::new(s);
-                            if row_color_toggle {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
-                                );
-                            } else {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
-                                );
-                            }
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset;
-                            layout.y += y_offset;
-                            layout.width -= 3;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
 
-                            y_offset += 1;
-                            row_color_toggle = !row_color_toggle;
-                            let s = format!(
-                                "Temperature: {:.4} {}",
-                                app.gas_detail_view_state.temperature.value(),
-                                app.gas_detail_view_state.temperature.unit().to_string(),
+                            render_row(
+                                format!(
+                                    "Temperature: {:.4} {}",
+                                    app.gas_detail_view_state.temperature.value(),
+                                    app.gas_detail_view_state.temperature.unit().to_string(),
+                                ),
+                                sub_layout[0],
+                                x_offset,
+                                &mut y_offset,
+                                row_color_fg_1,
+                                row_color_bg_1,
+                                row_color_fg_2,
+                                row_color_bg_2,
+                                &mut row_color_toggle,
+                                f,
                             );
-                            let mut p = Paragraph::new(s);
-                            if row_color_toggle {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
-                                );
-                            } else {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
-                                );
-                            }
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset;
-                            layout.y += y_offset;
-                            layout.width -= 3;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
 
-                            y_offset += 1;
-                            row_color_toggle = !row_color_toggle;
-                            let s = format!("Specific Heat Cv:");
-                            let mut p = Paragraph::new(s);
-                            if row_color_toggle {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
-                                );
-                            } else {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
-                                );
-                            }
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset;
-                            layout.y += y_offset;
-                            layout.width -= 3;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
-
-                            let s = format!("{:.4}", g.specific_heat_cv());
-                            let mut p = Paragraph::new(s);
-                            if row_color_toggle {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
-                                );
-                            } else {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
-                                );
-                            }
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset + 29;
-                            layout.y += y_offset;
-                            layout.width -= 30;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
-
-                            y_offset += 1;
-                            row_color_toggle = !row_color_toggle;
-                            let s = format!(
-                                "Specific Heat Ratio (Cp/Cv): {:.4}",
-                                g.specific_heat_ratio()
+                            render_row(
+                                format!(
+                                    "Specific Heat Ratio (Cp/Cv): {:.4}",
+                                    app.gas_detail_view_state.specific_heat_ratio,
+                                ),
+                                sub_layout[0],
+                                x_offset,
+                                &mut y_offset,
+                                row_color_fg_1,
+                                row_color_bg_1,
+                                row_color_fg_2,
+                                row_color_bg_2,
+                                &mut row_color_toggle,
+                                f,
                             );
-                            let mut p = Paragraph::new(s);
-                            if row_color_toggle {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
-                                );
-                            } else {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
-                                );
-                            }
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset;
-                            layout.y += y_offset;
-                            layout.width -= 3;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
-
-                            y_offset += 1;
-                            row_color_toggle = !row_color_toggle;
-                            let s = format!("Molar Mass: {:.4} g/mol", g.molar_mass());
-                            let mut p = Paragraph::new(s);
-                            if row_color_toggle {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
-                                );
-                            } else {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
-                                );
-                            }
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset;
-                            layout.y += y_offset;
-                            layout.width -= 3;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
-
-                            y_offset += 1;
-                            row_color_toggle = !row_color_toggle;
-                            let s = format!(
-                                "Calulated (cp/cv): {:.4}",
-                                app.gas_detail_view_state.specific_heat_ratio
-                            );
-                            let mut p = Paragraph::new(s);
-                            if row_color_toggle {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_1).bg(row_color_bg_1),
-                                );
-                            } else {
-                                p = p.set_style(
-                                    Style::default().fg(row_color_fg_2).bg(row_color_bg_2),
-                                );
-                            }
-                            let mut layout = sub_layout[0];
-                            layout.x += x_offset;
-                            layout.y += y_offset;
-                            layout.width -= 3;
-                            layout.height = 1;
-                            f.render_widget(p, layout);
                         }
                     }
                     None => (),
@@ -327,4 +211,32 @@ impl Default for GasDetailView {
     fn default() -> Self {
         GasDetailView::new()
     }
+}
+
+fn render_row(
+    text: String,
+    layout: Rect,
+    x_offset: u16,
+    y_offset: &mut u16,
+    row_color_fg_1: Color,
+    row_color_bg_1: Color,
+    row_color_fg_2: Color,
+    row_color_bg_2: Color,
+    row_color_toggle: &mut bool,
+    f: &mut Frame,
+) {
+    *y_offset += 1;
+    *row_color_toggle = !*row_color_toggle;
+    let mut p = Paragraph::new(text);
+    if *row_color_toggle {
+        p = p.set_style(Style::default().fg(row_color_fg_1).bg(row_color_bg_1));
+    } else {
+        p = p.set_style(Style::default().fg(row_color_fg_2).bg(row_color_bg_2));
+    }
+    let mut layout = layout.clone();
+    layout.x += x_offset;
+    layout.y += *y_offset;
+    layout.width -= 3;
+    layout.height = 1;
+    f.render_widget(p, layout);
 }
