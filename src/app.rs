@@ -84,6 +84,38 @@ impl App {
                             self.command_line.clear();
                             self.command_line_active = false;
                         }
+                        "pa" => {
+                            let value: f32 = command_args[1].parse().unwrap();
+                            let new_pressure =
+                                pressure::Pressure::new(value, pressure::Unit::Kpa, true);
+                            self.gas_detail_view_state.set_pressure_state(new_pressure);
+                            self.command_line.clear();
+                            self.command_line_active = false;
+                        }
+                        "bar" => {
+                            let value: f32 = command_args[1].parse().unwrap();
+                            let new_pressure =
+                                pressure::Pressure::new(value, pressure::Unit::Bar, true);
+                            self.gas_detail_view_state.set_pressure_state(new_pressure);
+                            self.command_line.clear();
+                            self.command_line_active = false;
+                        }
+                        "psi" => {
+                            let value: f32 = command_args[1].parse().unwrap();
+                            let new_pressure =
+                                pressure::Pressure::new(value, pressure::Unit::Psi, true);
+                            self.gas_detail_view_state.set_pressure_state(new_pressure);
+                            self.command_line.clear();
+                            self.command_line_active = false;
+                        }
+                        "atm" => {
+                            let value: f32 = command_args[1].parse().unwrap();
+                            let new_pressure =
+                                pressure::Pressure::new(value, pressure::Unit::Atm, true);
+                            self.gas_detail_view_state.set_pressure_state(new_pressure);
+                            self.command_line.clear();
+                            self.command_line_active = false;
+                        }
                         _ => self.print_pressure_usage(),
                     },
                     None => self.print_pressure_usage(),

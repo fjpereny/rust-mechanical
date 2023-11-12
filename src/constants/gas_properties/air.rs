@@ -6,9 +6,9 @@ pub mod specific_heat_ratio {
         // T230K,
         // T240K,
         T250K,
-        // T260K,
-        // T270K,
-        // T280K,
+        T260K,
+        T270K,
+        T280K,
         // T290K,
         T300K,
         // T310K,
@@ -74,6 +74,45 @@ pub mod specific_heat_ratio {
                 PressureIndex::P70x00ATM => 1.6130,
                 PressureIndex::P100x00ATM => 1.6990,
             },
+            TemperatureIndex::T260K => match press {
+                PressureIndex::P0x01ATM => 1.4008,
+                PressureIndex::P0x10ATM => 1.4010,
+                PressureIndex::P0x40ATM => 1.4017,
+                PressureIndex::P0x70ATM => 1.4024,
+                PressureIndex::P1x00ATM => 1.4032,
+                PressureIndex::P4x00ATM => 1.4107,
+                PressureIndex::P7x00ATM => 1.4183,
+                PressureIndex::P10x00ATM => 1.4259,
+                PressureIndex::P40x00ATM => 1.5062,
+                PressureIndex::P70x00ATM => 1.5885,
+                PressureIndex::P100x00ATM => 1.6631,
+            },
+            TemperatureIndex::T270K => match press {
+                PressureIndex::P0x01ATM => 1.4006,
+                PressureIndex::P0x10ATM => 1.4008,
+                PressureIndex::P0x40ATM => 1.4014,
+                PressureIndex::P0x70ATM => 1.4022,
+                PressureIndex::P1x00ATM => 1.4029,
+                PressureIndex::P4x00ATM => 1.4097,
+                PressureIndex::P7x00ATM => 1.4166,
+                PressureIndex::P10x00ATM => 1.4236,
+                PressureIndex::P40x00ATM => 1.4956,
+                PressureIndex::P70x00ATM => 1.5683,
+                PressureIndex::P100x00ATM => 1.6339,
+            },
+            TemperatureIndex::T280K => match press {
+                PressureIndex::P0x01ATM => 1.4004,
+                PressureIndex::P0x10ATM => 1.4006,
+                PressureIndex::P0x40ATM => 1.4012,
+                PressureIndex::P0x70ATM => 1.4018,
+                PressureIndex::P1x00ATM => 1.4024,
+                PressureIndex::P4x00ATM => 1.4087,
+                PressureIndex::P7x00ATM => 1.4150,
+                PressureIndex::P10x00ATM => 1.4214,
+                PressureIndex::P40x00ATM => 1.4865,
+                PressureIndex::P70x00ATM => 1.5511,
+                PressureIndex::P100x00ATM => 1.6094,
+            },
             TemperatureIndex::T300K => match press {
                 PressureIndex::P0x01ATM => 1.4000,
                 PressureIndex::P0x10ATM => 1.4001,
@@ -123,6 +162,36 @@ pub mod specific_heat_ratio {
         if temperature_k > t_low && temperature_k <= t_high {
             temp_index_a = TemperatureIndex::T200K;
             temp_index_b = TemperatureIndex::T250K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 260.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T250K;
+            temp_index_b = TemperatureIndex::T260K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 270.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T260K;
+            temp_index_b = TemperatureIndex::T270K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 280.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T270K;
+            temp_index_b = TemperatureIndex::T280K;
             temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
             temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
         }
@@ -267,10 +336,10 @@ pub mod specific_heat_ratio {
         let value_t_2_p1 = table(&temp_index_b, &press_index_a);
         let value_t_2_p2 = table(&temp_index_b, &press_index_b);
 
-        let scale_temp_1 = temp_delta_a;
-        let scale_temp_2 = temp_delta_b;
-        let scale_press_1 = press_delta_a;
-        let scale_press_2 = press_delta_b;
+        let scale_temp_1 = 1.0 - temp_delta_a;
+        let scale_temp_2 = 1.0 - temp_delta_b;
+        let scale_press_1 = 1.0 - press_delta_a;
+        let scale_press_2 = 1.0 - press_delta_b;
 
         let value_t_1_p1 = value_t_1_p1 * scale_temp_1 * scale_press_1;
         let value_t_1_p2 = value_t_1_p2 * scale_temp_1 * scale_press_2;
