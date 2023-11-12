@@ -72,6 +72,7 @@ impl App {
                 ":q!" => {
                     self.should_quit = true;
                     self.command_line.clear();
+                    self.command_line_active = false;
                 }
                 ":p" => match command_args.get(2) {
                     Some(val) => match val.to_lowercase().as_str() {
@@ -81,6 +82,7 @@ impl App {
                                 pressure::Pressure::new(value, pressure::Unit::Kpa, true);
                             self.gas_detail_view_state.set_pressure_state(new_pressure);
                             self.command_line.clear();
+                            self.command_line_active = false;
                         }
                         _ => self.print_pressure_usage(),
                     },
