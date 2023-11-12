@@ -87,7 +87,7 @@ impl App {
                         "pa" => {
                             let value: f32 = command_args[1].parse().unwrap();
                             let new_pressure =
-                                pressure::Pressure::new(value, pressure::Unit::Kpa, true);
+                                pressure::Pressure::new(value, pressure::Unit::Pa, true);
                             self.gas_detail_view_state.set_pressure_state(new_pressure);
                             self.command_line.clear();
                             self.command_line_active = false;
