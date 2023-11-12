@@ -4,12 +4,42 @@ use crate::app::App;
 use ratatui::prelude::*;
 use ratatui::widgets::*;
 use rust_mechanical::constants::gas_properties::air;
+use rust_mechanical::units::pressure;
+use rust_mechanical::units::temperature;
 use std::vec;
 
 pub enum GasDetailWidget {
     Left,
     TopRight,
     BottomRight,
+}
+
+pub struct GasDetailViewState {
+    pressure: pressure::Pressure,
+    temperature: temperature::Temperature,
+
+    // Calculated
+    specific_heat_ratio: f32,
+
+    update: bool,
+}
+
+impl GasDetailViewState {
+    pub fn new() -> Self {
+        let pressure = pressure::Pressure::new(1.0, pressure::Unit::Atm, true);
+        let temperature = temperature::Temperature::new(273.15, temperature::Unit::K);
+        let specific_heat_ratio =
+            air::specific_heat_ratio::interpolate(temperature.value(), pressure.value())
+                .expect("Error: specific heat ratio interplation failed!");
+
+        Self {
+            pressure,
+            temperature,
+
+            specific_heat_ratio,
+            update: false,
+        }
+    }
 }
 
 pub struct GasDetailView {}
@@ -134,7 +164,11 @@ impl GasDetailView {
 
                             y_offset += 1;
                             let mut row_color_toggle = true;
-                            let s = format!("Density: {:.4} kg/m^3", g.standard_density());
+                            let s = format!(
+                                "Pressure: {:.4} {}",
+                                app.gas_detail_view_state.pressure.value(),
+                                app.gas_detail_view_state.pressure.unit().to_string(),
+                            );
                             let mut p = Paragraph::new(s);
                             if row_color_toggle {
                                 p = p.set_style(
@@ -154,8 +188,11 @@ impl GasDetailView {
 
                             y_offset += 1;
                             row_color_toggle = !row_color_toggle;
-                            let s =
-                                format!("Specific Heat Cp: {:.4} kJ/kg-K", g.specific_heat_cp());
+                            let s = format!(
+                                "Temperature: {:.4} {}",
+                                app.gas_detail_view_state.temperature.value(),
+                                app.gas_detail_view_state.temperature.unit().to_string(),
+                            );
                             let mut p = Paragraph::new(s);
                             if row_color_toggle {
                                 p = p.set_style(
@@ -258,7 +295,7 @@ impl GasDetailView {
                             row_color_toggle = !row_color_toggle;
                             let s = format!(
                                 "Calulated (cp/cv): {:.4}",
-                                air::specific_heat_ratio::interpolate(225.0, 0.05).unwrap()
+                                app.gas_detail_view_state.specific_heat_ratio
                             );
                             let mut p = Paragraph::new(s);
                             if row_color_toggle {

@@ -6,6 +6,17 @@ pub enum Unit {
     F,
 }
 
+impl Unit {
+    pub fn to_string(&self) -> &'static str {
+        match self {
+            Unit::R => "R",
+            Unit::K => "K",
+            Unit::C => "°C",
+            Unit::F => "°F",
+        }
+    }
+}
+
 fn convert(from_value: f32, from_unit: &Unit, to_unit: &Unit) -> f32 {
     match from_unit {
         Unit::R => match to_unit {

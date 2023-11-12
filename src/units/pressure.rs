@@ -6,6 +6,19 @@ pub enum Unit {
     Kpa,
     Pa,
     Bar,
+    Atm,
+}
+
+impl Unit {
+    pub fn to_string(&self) -> &'static str {
+        match self {
+            Unit::Pa => "Pa",
+            Unit::Psi => "psi",
+            Unit::Kpa => "kPa",
+            Unit::Bar => "bar",
+            Unit::Atm => "atm",
+        }
+    }
 }
 
 fn conversion_kpa(unit: &Unit) -> f32 {
@@ -14,6 +27,7 @@ fn conversion_kpa(unit: &Unit) -> f32 {
         Unit::Kpa => 1.0,
         Unit::Pa => 1000.0,
         Unit::Bar => 0.01,
+        Unit::Atm => 1.009_869_2,
     }
 }
 

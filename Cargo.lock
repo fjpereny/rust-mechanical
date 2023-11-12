@@ -236,7 +236,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "rust-mechanical"
+name = "rust_mechanical"
 version = "0.0.0"
 dependencies = [
  "crossterm",

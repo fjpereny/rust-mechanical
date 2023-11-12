@@ -3,6 +3,7 @@ use rust_mechanical::constants::gas::{self, Gas};
 use ui::command_line::CommandLine;
 use ui::popups::quit_warning_popup::QuitWarningPopup;
 use ui::themes::Theme;
+use ui::views::gas_detail::GasDetailViewState;
 use ui::views::gas_detail::GasDetailWidget;
 use ui::{popups::Popup, views::View};
 
@@ -24,6 +25,7 @@ pub struct App {
 
     gas_detail_menu: StatefulList<Gas>,
     gas_detail_active_menu: GasDetailWidget,
+    gas_detail_view_state: GasDetailViewState,
 
     pub quit_warning_popup: QuitWarningPopup,
 }
@@ -43,6 +45,7 @@ impl App {
 
             gas_detail_menu: StatefulList::with_items(gas::gas_list()),
             gas_detail_active_menu: GasDetailWidget::Left,
+            gas_detail_view_state: GasDetailViewState::new(),
 
             quit_warning_popup: QuitWarningPopup::new(),
         }
