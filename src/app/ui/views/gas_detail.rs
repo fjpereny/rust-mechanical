@@ -63,6 +63,18 @@ impl GasDetailViewState {
         self.temperature = temperature;
         self.update();
     }
+
+    pub fn set_units_si(&mut self) {
+        self.pressure.convert_unit(pressure::Unit::Kpa);
+        self.temperature.convert_unit(temperature::Unit::C);
+        self.update();
+    }
+
+    pub fn set_units_us(&mut self) {
+        self.pressure.convert_unit(pressure::Unit::Psi);
+        self.temperature.convert_unit(temperature::Unit::F);
+        self.update();
+    }
 }
 
 pub struct GasDetailView {}

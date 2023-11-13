@@ -3,6 +3,8 @@ use crate::app::App;
 use crate::units::pressure;
 use crate::units::temperature;
 
+use super::command_errors::err_unit_usage;
+
 pub fn run_command(app: &mut App, command_args: Vec<&str>) {
     let first_arg = command_args.get(0);
     if first_arg.is_none() {
@@ -13,6 +15,27 @@ pub fn run_command(app: &mut App, command_args: Vec<&str>) {
 
     let first_arg = first_arg.unwrap();
     match *first_arg {
+        ":units" => {
+            let value = command_args.get(1);
+            if value.is_some() {
+                match value.unwrap().to_lowercase().as_str() {
+                    "si" => {
+                        app.gas_detail_view_state.set_units_si();
+                        app.command_line.clear();
+                        app.command_line_active = false;
+                    }
+                    "us" => {
+                        app.gas_detail_view_state.set_units_us();
+                        app.command_line.clear();
+                        app.command_line_active = false;
+                    }
+                    _ => err_unit_usage(app),
+                }
+            } else {
+                command_errors::err_unit_usage(app)
+            }
+        }
+
         ":p" => {
             let value = command_args[1].parse();
             if value.is_ok() {
@@ -54,9 +77,9 @@ pub fn run_command(app: &mut App, command_args: Vec<&str>) {
                             app.command_line.clear();
                             app.command_line_active = false;
                         }
-                        _ => command_errors::print_pressure_usage(app),
+                        _ => command_errors::err_pressure_usage(app),
                     },
-                    None => command_errors::print_pressure_usage(app),
+                    None => command_errors::err_pressure_usage(app),
                 }
             }
         }
@@ -99,9 +122,9 @@ pub fn run_command(app: &mut App, command_args: Vec<&str>) {
                             app.command_line.clear();
                             app.command_line_active = false;
                         }
-                        _ => command_errors::print_temperature_usage(app),
+                        _ => command_errors::err_temperature_usage(app),
                     },
-                    None => command_errors::print_temperature_usage(app),
+                    None => command_errors::err_temperature_usage(app),
                 }
             } else {
             }
