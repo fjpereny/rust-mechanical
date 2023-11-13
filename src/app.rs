@@ -58,11 +58,6 @@ impl App {
     pub fn quit(&mut self) {
         self.should_quit = true
     }
-
-    fn print_pressure_usage(&mut self) {
-        self.command_line_error = true;
-        self.command_line.text = String::from("Usage :p <pressure> <unit> example:[:p 100 kpa]");
-    }
 }
 
 impl Default for App {

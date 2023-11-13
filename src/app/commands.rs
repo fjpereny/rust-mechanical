@@ -1,6 +1,7 @@
 use crate::app::ui::views::View;
 use crate::app::App;
 
+pub mod command_errors;
 pub mod gas_details_view_commands;
 
 pub fn run_command(app: &mut App, command: String) {

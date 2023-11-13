@@ -19,7 +19,7 @@ pub mod specific_heat_ratio {
         // T360K,
         // T380K,
         // T390K,
-        // T400K,
+        T400K,
         // T410K,
         // T420K,
         // T430K,
@@ -139,6 +139,19 @@ pub mod specific_heat_ratio {
                 PressureIndex::P70x00ATM => 1.4804,
                 PressureIndex::P100x00ATM => 1.5109,
             },
+            TemperatureIndex::T400K => match press {
+                PressureIndex::P0x01ATM => 1.3952,
+                PressureIndex::P0x10ATM => 1.3953,
+                PressureIndex::P0x40ATM => 1.3956,
+                PressureIndex::P0x70ATM => 1.3958,
+                PressureIndex::P1x00ATM => 1.3961,
+                PressureIndex::P4x00ATM => 1.3987,
+                PressureIndex::P7x00ATM => 1.4014,
+                PressureIndex::P10x00ATM => 1.4041,
+                PressureIndex::P40x00ATM => 1.4299,
+                PressureIndex::P70x00ATM => 1.4537,
+                PressureIndex::P100x00ATM => 1.4752,
+            },
         }
     }
 
@@ -212,6 +225,16 @@ pub mod specific_heat_ratio {
         if temperature_k > t_low && temperature_k <= t_high {
             temp_index_a = TemperatureIndex::T300K;
             temp_index_b = TemperatureIndex::T350K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 400.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T350K;
+            temp_index_b = TemperatureIndex::T400K;
             temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
             temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
         }
