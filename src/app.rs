@@ -1,5 +1,4 @@
 use crate::constants::gas::{self, Gas};
-use commands::run_command;
 use ratatui::widgets::ListState;
 use ui::command_line::CommandLine;
 use ui::popups::quit_warning_popup::QuitWarningPopup;

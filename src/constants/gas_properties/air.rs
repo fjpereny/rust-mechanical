@@ -1,39 +1,79 @@
 pub mod specific_heat_ratio {
     pub enum TemperatureIndex {
+        T90K,
+        T100K,
+        T110K,
+        T120K,
+        T130K,
+        T140K,
+        T150K,
+        T160K,
+        T170K,
+        T180K,
+        T190K,
         T200K,
-        // T210K,
-        // T220K,
-        // T230K,
-        // T240K,
+        T210K,
+        T220K,
+        T230K,
+        T240K,
         T250K,
         T260K,
         T270K,
         T280K,
-        // T290K,
+        T290K,
         T300K,
-        // T310K,
-        // T320K,
-        // T330K,
-        // T340K,
+        T310K,
+        T320K,
+        T330K,
+        T340K,
         T350K,
-        // T360K,
-        // T380K,
-        // T390K,
+        T360K,
+        T380K,
+        T390K,
         T400K,
-        // T410K,
-        // T420K,
-        // T430K,
-        // T440K,
-        // T450K,
-        // T460K,
-        // T470K,
-        // T480K,
-        // T490K,
+        T410K,
+        T420K,
+        T430K,
+        T440K,
+        T450K,
+        T460K,
+        T470K,
+        T480K,
+        T490K,
         T500K,
+        T510K,
+        T520K,
+        T530K,
+        T540K,
+        T550K,
+        T560K,
+        T570K,
+        T580K,
+        T590K,
         T600K,
+        T610K,
+        T620K,
+        T630K,
+        T640K,
+        T650K,
+        T660K,
+        T670K,
+        T680K,
+        T690K,
         T700K,
+        T710K,
+        T720K,
+        T730K,
+        T740K,
+        T750K,
+        T760K,
+        T770K,
+        T780K,
+        T790K,
         T800K,
+        T850K,
         T900K,
+        T950K,
         T1000K,
         T1100K,
         T1200K,
@@ -45,6 +85,7 @@ pub mod specific_heat_ratio {
         T1800K,
         T1900K,
         T2000K,
+        T2100K,
     }
 
     pub enum PressureIndex {
@@ -63,6 +104,64 @@ pub mod specific_heat_ratio {
 
     pub fn table(temp: &TemperatureIndex, press: &PressureIndex) -> f32 {
         match temp {
+            TemperatureIndex::T90K => match press {
+                PressureIndex::P0x01ATM => 1.4017,
+                PressureIndex::P0x10ATM => 1.4046,
+                PressureIndex::P0x40ATM => 1.4139,
+                PressureIndex::P0x70ATM => 1.4237,
+                _ => -1.0,
+            },
+            TemperatureIndex::T100K => match press {
+                PressureIndex::P0x01ATM => 1.4016,
+                PressureIndex::P0x10ATM => 1.4038,
+                PressureIndex::P0x40ATM => 1.4108,
+                PressureIndex::P0x70ATM => 1.4182,
+                _ => -1.0,
+            },
+            TemperatureIndex::T110K => match press {
+                PressureIndex::P0x01ATM => 1.4015,
+                PressureIndex::P0x10ATM => 1.4032,
+                PressureIndex::P0x40ATM => 1.4087,
+                PressureIndex::P0x70ATM => 1.4144,
+                PressureIndex::P1x00ATM => 1.4202,
+                PressureIndex::P4x00ATM => 1.4960,
+                PressureIndex::P7x00ATM => 1.6035,
+                PressureIndex::P10x00ATM => 1.7672,
+                _ => -1.0,
+            },
+            TemperatureIndex::T120K => match press {
+                PressureIndex::P0x01ATM => 1.4015,
+                PressureIndex::P0x10ATM => 1.4029,
+                PressureIndex::P0x40ATM => 1.4073,
+                PressureIndex::P0x70ATM => 1.4119,
+                PressureIndex::P1x00ATM => 1.4166,
+                PressureIndex::P4x00ATM => 1.4730,
+                PressureIndex::P7x00ATM => 1.5513,
+                PressureIndex::P10x00ATM => 1.6395,
+                _ => -1.0,
+            },
+            TemperatureIndex::T130K => match press {
+                PressureIndex::P0x01ATM => 1.4015,
+                PressureIndex::P0x10ATM => 1.4026,
+                PressureIndex::P0x40ATM => 1.4063,
+                PressureIndex::P0x70ATM => 1.4101,
+                PressureIndex::P1x00ATM => 1.4139,
+                PressureIndex::P4x00ATM => 1.4578,
+                PressureIndex::P7x00ATM => 1.5139,
+                PressureIndex::P10x00ATM => 1.5740,
+                _ => -1.0,
+            },
+            TemperatureIndex::T140K => match press {
+                PressureIndex::P0x01ATM => 1.4015,
+                PressureIndex::P0x10ATM => 1.4024,
+                PressureIndex::P0x40ATM => 1.4055,
+                PressureIndex::P0x70ATM => 1.4087,
+                PressureIndex::P1x00ATM => 1.4119,
+                PressureIndex::P4x00ATM => 1.4473,
+                PressureIndex::P7x00ATM => 1.4901,
+                PressureIndex::P10x00ATM => 1.5350,
+                _ => -1.0,
+            },
             TemperatureIndex::T200K => match press {
                 PressureIndex::P0x01ATM => 1.4013,
                 PressureIndex::P0x10ATM => 1.4017,
@@ -375,14 +474,27 @@ pub mod specific_heat_ratio {
                 PressureIndex::P70x00ATM => 1.280,
                 PressureIndex::P100x00ATM => 1.281,
             },
+            _ => todo!("Temperature Index not implemented"),
         }
     }
 
     pub fn interpolate(temperature_k: f32, pressure_atm: f32) -> Option<f32> {
-        if temperature_k < 200.0 || temperature_k > 2000.0 {
+        if temperature_k < 90.0 || temperature_k > 3000.0 {
             return None;
         }
-        if pressure_atm < 0.01 || pressure_atm > 100.0 {
+        if temperature_k < 200.0 && pressure_atm >= 100.0 {
+            return None;
+        }
+        if temperature_k < 180.0 && pressure_atm >= 70.0 {
+            return None;
+        }
+        if temperature_k < 150.0 && pressure_atm > 40.0 {
+            return None;
+        }
+        if temperature_k < 110.0 && pressure_atm > 0.7 {
+            return None;
+        }
+        if temperature_k > 2100.0 && pressure_atm < 0.1 {
             return None;
         }
 
