@@ -29,7 +29,22 @@ pub mod specific_heat_ratio {
         // T470K,
         // T480K,
         // T490K,
-        // T500K,
+        T500K,
+        T600K,
+        T700K,
+        T800K,
+        T900K,
+        T1000K,
+        T1100K,
+        T1200K,
+        T1300K,
+        T1400K,
+        T1500K,
+        T1600K,
+        T1700K,
+        T1800K,
+        T1900K,
+        T2000K,
     }
 
     pub enum PressureIndex {
@@ -152,6 +167,214 @@ pub mod specific_heat_ratio {
                 PressureIndex::P70x00ATM => 1.4537,
                 PressureIndex::P100x00ATM => 1.4752,
             },
+            TemperatureIndex::T500K => match press {
+                PressureIndex::P0x01ATM => 1.3866,
+                PressureIndex::P0x10ATM => 1.3867,
+                PressureIndex::P0x40ATM => 1.3868,
+                PressureIndex::P0x70ATM => 1.3870,
+                PressureIndex::P1x00ATM => 1.3871,
+                PressureIndex::P4x00ATM => 1.3887,
+                PressureIndex::P7x00ATM => 1.3903,
+                PressureIndex::P10x00ATM => 1.3918,
+                PressureIndex::P40x00ATM => 1.4065,
+                PressureIndex::P70x00ATM => 1.4199,
+                PressureIndex::P100x00ATM => 1.4321,
+            },
+            TemperatureIndex::T600K => match press {
+                PressureIndex::P0x01ATM => 1.3757,
+                PressureIndex::P0x10ATM => 1.3758,
+                PressureIndex::P0x40ATM => 1.3758,
+                PressureIndex::P0x70ATM => 1.3759,
+                PressureIndex::P1x00ATM => 1.3760,
+                PressureIndex::P4x00ATM => 1.3770,
+                PressureIndex::P7x00ATM => 1.3780,
+                PressureIndex::P10x00ATM => 1.3788,
+                PressureIndex::P40x00ATM => 1.3882,
+                PressureIndex::P70x00ATM => 1.3967,
+                PressureIndex::P100x00ATM => 1.4041,
+            },
+            TemperatureIndex::T700K => match press {
+                PressureIndex::P0x01ATM => 1.3643,
+                PressureIndex::P0x10ATM => 1.3644,
+                PressureIndex::P0x40ATM => 1.3644,
+                PressureIndex::P0x70ATM => 1.3645,
+                PressureIndex::P1x00ATM => 1.3646,
+                PressureIndex::P4x00ATM => 1.3652,
+                PressureIndex::P7x00ATM => 1.3658,
+                PressureIndex::P10x00ATM => 1.3664,
+                PressureIndex::P40x00ATM => 1.3725,
+                PressureIndex::P70x00ATM => 1.3783,
+                PressureIndex::P100x00ATM => 1.3832,
+            },
+            TemperatureIndex::T800K => match press {
+                PressureIndex::P0x01ATM => 1.354,
+                PressureIndex::P0x10ATM => 1.354,
+                PressureIndex::P0x40ATM => 1.354,
+                PressureIndex::P0x70ATM => 1.354,
+                PressureIndex::P1x00ATM => 1.354,
+                PressureIndex::P4x00ATM => 1.354,
+                PressureIndex::P7x00ATM => 1.355,
+                PressureIndex::P10x00ATM => 1.3551,
+                PressureIndex::P40x00ATM => 1.3592,
+                PressureIndex::P70x00ATM => 1.3630,
+                PressureIndex::P100x00ATM => 1.3665,
+            },
+            TemperatureIndex::T900K => match press {
+                PressureIndex::P0x01ATM => 1.344,
+                PressureIndex::P0x10ATM => 1.344,
+                PressureIndex::P0x40ATM => 1.344,
+                PressureIndex::P0x70ATM => 1.344,
+                PressureIndex::P1x00ATM => 1.345,
+                PressureIndex::P4x00ATM => 1.345,
+                PressureIndex::P7x00ATM => 1.345,
+                PressureIndex::P10x00ATM => 1.3452,
+                PressureIndex::P40x00ATM => 1.3480,
+                PressureIndex::P70x00ATM => 1.3506,
+                PressureIndex::P100x00ATM => 1.3533,
+            },
+            TemperatureIndex::T1000K => match press {
+                PressureIndex::P0x01ATM => 1.336,
+                PressureIndex::P0x10ATM => 1.336,
+                PressureIndex::P0x40ATM => 1.336,
+                PressureIndex::P0x70ATM => 1.336,
+                PressureIndex::P1x00ATM => 1.336,
+                PressureIndex::P4x00ATM => 1.336,
+                PressureIndex::P7x00ATM => 1.336,
+                PressureIndex::P10x00ATM => 1.3364,
+                PressureIndex::P40x00ATM => 1.3386,
+                PressureIndex::P70x00ATM => 1.3406,
+                PressureIndex::P100x00ATM => 1.3423,
+            },
+            TemperatureIndex::T1100K => match press {
+                PressureIndex::P0x01ATM => 1.329,
+                PressureIndex::P0x10ATM => 1.329,
+                PressureIndex::P0x40ATM => 1.329,
+                PressureIndex::P0x70ATM => 1.329,
+                PressureIndex::P1x00ATM => 1.329,
+                PressureIndex::P4x00ATM => 1.329,
+                PressureIndex::P7x00ATM => 1.329,
+                PressureIndex::P10x00ATM => 1.3288,
+                PressureIndex::P40x00ATM => 1.3303,
+                PressureIndex::P70x00ATM => 1.3319,
+                PressureIndex::P100x00ATM => 1.3333,
+            },
+            TemperatureIndex::T1200K => match press {
+                PressureIndex::P0x01ATM => 1.322,
+                PressureIndex::P0x10ATM => 1.322,
+                PressureIndex::P0x40ATM => 1.322,
+                PressureIndex::P0x70ATM => 1.322,
+                PressureIndex::P1x00ATM => 1.322,
+                PressureIndex::P4x00ATM => 1.322,
+                PressureIndex::P7x00ATM => 1.322,
+                PressureIndex::P10x00ATM => 1.3221,
+                PressureIndex::P40x00ATM => 1.3232,
+                PressureIndex::P70x00ATM => 1.3243,
+                PressureIndex::P100x00ATM => 1.3254,
+            },
+            TemperatureIndex::T1300K => match press {
+                PressureIndex::P0x01ATM => 1.316,
+                PressureIndex::P0x10ATM => 1.316,
+                PressureIndex::P0x40ATM => 1.316,
+                PressureIndex::P0x70ATM => 1.316,
+                PressureIndex::P1x00ATM => 1.316,
+                PressureIndex::P4x00ATM => 1.316,
+                PressureIndex::P7x00ATM => 1.316,
+                PressureIndex::P10x00ATM => 1.3156,
+                PressureIndex::P40x00ATM => 1.3165,
+                PressureIndex::P70x00ATM => 1.3174,
+                PressureIndex::P100x00ATM => 1.3181,
+            },
+            TemperatureIndex::T1400K => match press {
+                PressureIndex::P0x01ATM => 1.310,
+                PressureIndex::P0x10ATM => 1.310,
+                PressureIndex::P0x40ATM => 1.310,
+                PressureIndex::P0x70ATM => 1.310,
+                PressureIndex::P1x00ATM => 1.310,
+                PressureIndex::P4x00ATM => 1.310,
+                PressureIndex::P7x00ATM => 1.310,
+                PressureIndex::P10x00ATM => 1.3098,
+                PressureIndex::P40x00ATM => 1.3106,
+                PressureIndex::P70x00ATM => 1.3111,
+                PressureIndex::P100x00ATM => 1.3117,
+            },
+            TemperatureIndex::T1500K => match press {
+                PressureIndex::P0x01ATM => 1.304,
+                PressureIndex::P0x10ATM => 1.304,
+                PressureIndex::P0x40ATM => 1.304,
+                PressureIndex::P0x70ATM => 1.304,
+                PressureIndex::P1x00ATM => 1.304,
+                PressureIndex::P4x00ATM => 1.304,
+                PressureIndex::P7x00ATM => 1.304,
+                PressureIndex::P10x00ATM => 1.3043,
+                PressureIndex::P40x00ATM => 1.3047,
+                PressureIndex::P70x00ATM => 1.3052,
+                PressureIndex::P100x00ATM => 1.3056,
+            },
+            TemperatureIndex::T1600K => match press {
+                PressureIndex::P0x01ATM => 1.298,
+                PressureIndex::P0x10ATM => 1.299,
+                PressureIndex::P0x40ATM => 1.299,
+                PressureIndex::P0x70ATM => 1.299,
+                PressureIndex::P1x00ATM => 1.299,
+                PressureIndex::P4x00ATM => 1.299,
+                PressureIndex::P7x00ATM => 1.299,
+                PressureIndex::P10x00ATM => 1.299,
+                PressureIndex::P40x00ATM => 1.301,
+                PressureIndex::P70x00ATM => 1.302,
+                PressureIndex::P100x00ATM => 1.303,
+            },
+            TemperatureIndex::T1700K => match press {
+                PressureIndex::P0x01ATM => 1.290,
+                PressureIndex::P0x10ATM => 1.292,
+                PressureIndex::P0x40ATM => 1.293,
+                PressureIndex::P0x70ATM => 1.293,
+                PressureIndex::P1x00ATM => 1.293,
+                PressureIndex::P4x00ATM => 1.293,
+                PressureIndex::P7x00ATM => 1.293,
+                PressureIndex::P10x00ATM => 1.293,
+                PressureIndex::P40x00ATM => 1.294,
+                PressureIndex::P70x00ATM => 1.296,
+                PressureIndex::P100x00ATM => 1.297,
+            },
+            TemperatureIndex::T1800K => match press {
+                PressureIndex::P0x01ATM => 1.280,
+                PressureIndex::P0x10ATM => 1.286,
+                PressureIndex::P0x40ATM => 1.287,
+                PressureIndex::P0x70ATM => 1.288,
+                PressureIndex::P1x00ATM => 1.288,
+                PressureIndex::P4x00ATM => 1.288,
+                PressureIndex::P7x00ATM => 1.288,
+                PressureIndex::P10x00ATM => 1.288,
+                PressureIndex::P40x00ATM => 1.289,
+                PressureIndex::P70x00ATM => 1.290,
+                PressureIndex::P100x00ATM => 1.291,
+            },
+            TemperatureIndex::T1900K => match press {
+                PressureIndex::P0x01ATM => 1.266,
+                PressureIndex::P0x10ATM => 1.277,
+                PressureIndex::P0x40ATM => 1.281,
+                PressureIndex::P0x70ATM => 1.281,
+                PressureIndex::P1x00ATM => 1.282,
+                PressureIndex::P4x00ATM => 1.283,
+                PressureIndex::P7x00ATM => 1.283,
+                PressureIndex::P10x00ATM => 1.283,
+                PressureIndex::P40x00ATM => 1.284,
+                PressureIndex::P70x00ATM => 1.285,
+                PressureIndex::P100x00ATM => 1.286,
+            },
+            TemperatureIndex::T2000K => match press {
+                PressureIndex::P0x01ATM => 1.243,
+                PressureIndex::P0x10ATM => 1.266,
+                PressureIndex::P0x40ATM => 1.272,
+                PressureIndex::P0x70ATM => 1.273,
+                PressureIndex::P1x00ATM => 1.274,
+                PressureIndex::P4x00ATM => 1.277,
+                PressureIndex::P7x00ATM => 1.278,
+                PressureIndex::P10x00ATM => 1.278,
+                PressureIndex::P40x00ATM => 1.279,
+                PressureIndex::P70x00ATM => 1.280,
+                PressureIndex::P100x00ATM => 1.281,
+            },
         }
     }
 
@@ -235,6 +458,166 @@ pub mod specific_heat_ratio {
         if temperature_k > t_low && temperature_k <= t_high {
             temp_index_a = TemperatureIndex::T350K;
             temp_index_b = TemperatureIndex::T400K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 500.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T400K;
+            temp_index_b = TemperatureIndex::T500K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 600.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T500K;
+            temp_index_b = TemperatureIndex::T600K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 700.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T600K;
+            temp_index_b = TemperatureIndex::T700K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 800.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T700K;
+            temp_index_b = TemperatureIndex::T800K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 900.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T800K;
+            temp_index_b = TemperatureIndex::T900K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1000.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T900K;
+            temp_index_b = TemperatureIndex::T1000K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1100.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1000K;
+            temp_index_b = TemperatureIndex::T1100K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1200.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1100K;
+            temp_index_b = TemperatureIndex::T1200K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1300.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1200K;
+            temp_index_b = TemperatureIndex::T1300K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1400.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1300K;
+            temp_index_b = TemperatureIndex::T1400K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1500.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1400K;
+            temp_index_b = TemperatureIndex::T1500K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1600.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1500K;
+            temp_index_b = TemperatureIndex::T1600K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1700.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k < t_high {
+            temp_index_a = TemperatureIndex::T1600K;
+            temp_index_b = TemperatureIndex::T1700K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1800.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1700K;
+            temp_index_b = TemperatureIndex::T1800K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 1900.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1800K;
+            temp_index_b = TemperatureIndex::T1900K;
+            temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
+            temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
+        }
+        let next_temp_interval = 2000.0;
+        let t_low = t_high;
+        let t_high = next_temp_interval;
+        let t_range = t_high - t_low;
+        if temperature_k > t_low && temperature_k <= t_high {
+            temp_index_a = TemperatureIndex::T1900K;
+            temp_index_b = TemperatureIndex::T2000K;
             temp_delta_a = f32::abs((temperature_k - t_low) / t_range);
             temp_delta_b = f32::abs((t_high - temperature_k) / t_range);
         }
