@@ -1,7 +1,6 @@
+use crate::constants::gas::{self, Gas};
+use commands::run_command;
 use ratatui::widgets::ListState;
-use rust_mechanical::constants::gas::{self, Gas};
-use rust_mechanical::units::pressure;
-use rust_mechanical::units::temperature;
 use ui::command_line::CommandLine;
 use ui::popups::quit_warning_popup::QuitWarningPopup;
 use ui::themes::Theme;
@@ -9,6 +8,7 @@ use ui::views::gas_detail::GasDetailViewState;
 use ui::views::gas_detail::GasDetailWidget;
 use ui::{popups::Popup, views::View};
 
+pub mod commands;
 pub mod event;
 pub mod tui;
 pub mod ui;
@@ -62,71 +62,6 @@ impl App {
     fn print_pressure_usage(&mut self) {
         self.command_line_error = true;
         self.command_line.text = String::from("Usage :p <pressure> <unit> example:[:p 100 kpa]");
-    }
-
-    pub fn command(&mut self, command_str: String) {
-        let command_args: Vec<&str> = command_str.split(' ').collect();
-        let first_arg = command_args.first();
-        match first_arg {
-            Some(arg) => match *arg {
-                ":q!" => {
-                    self.should_quit = true;
-                    self.command_line.clear();
-                    self.command_line_active = false;
-                }
-                ":p" => match command_args.get(2) {
-                    Some(val) => match val.to_lowercase().as_str() {
-                        "kpa" => {
-                            let value: f32 = command_args[1].parse().unwrap();
-                            let new_pressure =
-                                pressure::Pressure::new(value, pressure::Unit::Kpa, true);
-                            self.gas_detail_view_state.set_pressure_state(new_pressure);
-                            self.command_line.clear();
-                            self.command_line_active = false;
-                        }
-                        "pa" => {
-                            let value: f32 = command_args[1].parse().unwrap();
-                            let new_pressure =
-                                pressure::Pressure::new(value, pressure::Unit::Pa, true);
-                            self.gas_detail_view_state.set_pressure_state(new_pressure);
-                            self.command_line.clear();
-                            self.command_line_active = false;
-                        }
-                        "bar" => {
-                            let value: f32 = command_args[1].parse().unwrap();
-                            let new_pressure =
-                                pressure::Pressure::new(value, pressure::Unit::Bar, true);
-                            self.gas_detail_view_state.set_pressure_state(new_pressure);
-                            self.command_line.clear();
-                            self.command_line_active = false;
-                        }
-                        "psi" => {
-                            let value: f32 = command_args[1].parse().unwrap();
-                            let new_pressure =
-                                pressure::Pressure::new(value, pressure::Unit::Psi, true);
-                            self.gas_detail_view_state.set_pressure_state(new_pressure);
-                            self.command_line.clear();
-                            self.command_line_active = false;
-                        }
-                        "atm" => {
-                            let value: f32 = command_args[1].parse().unwrap();
-                            let new_pressure =
-                                pressure::Pressure::new(value, pressure::Unit::Atm, true);
-                            self.gas_detail_view_state.set_pressure_state(new_pressure);
-                            self.command_line.clear();
-                            self.command_line_active = false;
-                        }
-                        _ => self.print_pressure_usage(),
-                    },
-                    None => self.print_pressure_usage(),
-                },
-                _ => {
-                    self.command_line_error = true;
-                    self.command_line.text = String::from("Unknown command!");
-                }
-            },
-            None => {}
-        }
     }
 }
 

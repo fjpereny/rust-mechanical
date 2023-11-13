@@ -1,4 +1,9 @@
 pub mod app;
+pub mod compression;
+pub mod constants;
+pub mod errors;
+pub mod states;
+pub mod units;
 
 use crate::app::event::{Event, EventHandler};
 use crate::app::tui::Tui;

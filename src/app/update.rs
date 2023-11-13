@@ -1,3 +1,4 @@
+use crate::app::commands::run_command;
 use crate::app::ui::popups::Popup;
 use crate::app::ui::views::View;
 use crate::app::App;
@@ -51,15 +52,19 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
                     app.command_line.text.push(ch);
                 }
             }
+
             KeyCode::Enter => {
                 let command = app.command_line.text.clone();
                 let first_char = command.chars().next();
-                if first_char.is_some() && first_char.unwrap() == '/' {
-                    // Search Here
-                } else {
-                    app.command(command);
+                if first_char.is_some() {
+                    match first_char.unwrap() {
+                        '/' => todo!("Add search functionality"),
+                        ':' => run_command(app, command),
+                        _ => todo!("Add command catch all"),
+                    }
                 }
             }
+
             KeyCode::Backspace => {
                 app.command_line.text.pop();
                 if app.command_line.text == *"" {

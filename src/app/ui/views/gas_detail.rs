@@ -1,11 +1,11 @@
 use crate::app::ui::themes::palettes::*;
 use crate::app::ui::themes::Theme;
 use crate::app::App;
+use crate::constants::gas_properties::air;
+use crate::units::pressure;
+use crate::units::temperature;
 use ratatui::prelude::*;
 use ratatui::widgets::*;
-use rust_mechanical::constants::gas_properties::air;
-use rust_mechanical::units::pressure;
-use rust_mechanical::units::temperature;
 use std::vec;
 
 pub enum GasDetailWidget {
