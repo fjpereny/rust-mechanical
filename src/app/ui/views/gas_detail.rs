@@ -2,6 +2,7 @@ use crate::app::ui::themes::palettes::*;
 use crate::app::ui::themes::Theme;
 use crate::app::App;
 use crate::constants::gas_properties::air;
+use crate::constants::gas_properties::Gas;
 use crate::units::pressure;
 use crate::units::temperature;
 use ratatui::prelude::*;
@@ -15,6 +16,7 @@ pub enum GasDetailWidget {
 }
 
 pub struct GasDetailViewState {
+    gas: Gas,
     pressure: pressure::Pressure,
     temperature: temperature::Temperature,
 
@@ -31,6 +33,7 @@ impl GasDetailViewState {
                 .expect("Error: specific heat ratio interplation failed!");
 
         Self {
+            gas: Gas::Air,
             pressure,
             temperature,
 
@@ -45,13 +48,17 @@ impl GasDetailViewState {
         let mut temperature_k = self.temperature.clone();
         temperature_k.convert_unit(temperature::Unit::K);
 
-        self.specific_heat_ratio = match air::specific_heat_ratio::interpolate(
-            temperature_k.value(),
-            pressure_atm.value(),
-        ) {
-            Some(val) => val,
-            _ => -1.0,
-        };
+        match self.gas {
+            Gas::Air => {
+                self.specific_heat_ratio = match air::specific_heat_ratio::interpolate(
+                    temperature_k.value(),
+                    pressure_atm.value(),
+                ) {
+                    Some(val) => val,
+                    _ => -1.0,
+                };
+            }
+        }
     }
 
     pub fn set_pressure_state(&mut self, pressure: pressure::Pressure) {
