@@ -154,12 +154,14 @@ impl GasDetailView {
                 match selected_gas {
                     Some(g) => {
                         if selected_gas.is_some() {
+                            let header_color_1;
                             let row_color_fg_1;
                             let row_color_bg_1;
                             let row_color_fg_2;
                             let row_color_bg_2;
                             match app.current_theme {
                                 Theme::Default => {
+                                    header_color_1 = DEFAULT_PALETTE.header_color_1;
                                     row_color_fg_1 = DEFAULT_PALETTE.row_color_fg_a;
                                     row_color_bg_1 = DEFAULT_PALETTE.row_color_bg_a;
                                     row_color_fg_2 = DEFAULT_PALETTE.row_color_fg_b;
@@ -170,6 +172,19 @@ impl GasDetailView {
                             let x_offset = 1;
                             let mut y_offset = 0;
                             let mut row_color_toggle = true;
+
+                            render_row(
+                                format!("{}", g.name()),
+                                sub_layout[0],
+                                x_offset,
+                                &mut y_offset,
+                                header_color_1,
+                                row_color_bg_1,
+                                header_color_1,
+                                row_color_bg_2,
+                                &mut row_color_toggle,
+                                f,
+                            );
 
                             render_row(
                                 format!(
